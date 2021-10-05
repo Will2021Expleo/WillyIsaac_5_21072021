@@ -6,3 +6,5 @@ getFilters();
 createEventsForFilters();
 
 getValidRecipes(); //permet d'afficher les recettes contenants les filtres cliqués
+
+getInputEvent(); //permet de faire une recherche depuis le champ de recherche principale

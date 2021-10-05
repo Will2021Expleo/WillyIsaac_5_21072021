@@ -38,8 +38,9 @@ function createRecipesObject() {
 
     allRecipes.push(oneNewRecipeObject); // permet de stocker toutes les recettes
   });
-
+  //return allRecipes;
   // allRecipesObjects = allRecipes; //retourne le résultat de la fonction et permet de l'afficher dans le console.log en dehors de la fonction
+  allRecipesObjects = allRecipes;
 }
 
 //fonction permettant de gérer les filtres sur les recettes
@@ -50,17 +51,17 @@ function getFilters() {
 
   allRecipes.forEach(function (oneRecipe) {
     oneRecipe.ingredients.forEach(function (oneIngredient) {
-      if (!allIngredientsFilters.includes(oneIngredient.name)) {
+      if (allIngredientsFilters.includes(oneIngredient.name) === false) {
         allIngredientsFilters.push(oneIngredient.name);
       }
     });
     oneRecipe.appliance.forEach(function (oneAppliance) {
-      if (!allAppliancesFilters.includes(oneAppliance.name)) {
+      if (allAppliancesFilters.includes(oneAppliance.name) === false) {
         allAppliancesFilters.push(oneAppliance.name);
       }
     });
     oneRecipe.ustensils.forEach(function (oneUstensil) {
-      if (!allUstensilsFilters.includes(oneUstensil.name)) {
+      if (allUstensilsFilters.includes(oneUstensil.name) === false) {
         allUstensilsFilters.push(oneUstensil.name);
       }
     });
@@ -171,18 +172,13 @@ function addFilter(filteredElement, typeOfElement) {
   );
   //on affiche l'élément sur lequel on a cliqué dans ingrédient, appareil et ustensile
 
-  allRecipes.forEach(function (oneRecipe) {
+  allRecipesObjects.forEach(function (oneRecipe) {
     if (type[typeOfElement] === "ingredients") {
       oneRecipe.ingredients.forEach(function (oneIngredient) {
         if (filteredElement === oneIngredient.name) {
           oneRecipe.hasFilters += 1;
           // la même chose que : oneRecipe.hasFilters = oneRecipe.hasFilter + 1
-          console.log(
-            "La recette",
-            oneRecipe.name,
-            " contient",
-            oneIngredient.name
-          );
+          //console.log("La recette", oneRecipe.name," contient", oneIngredient.name);
         }
       });
     }
@@ -192,12 +188,12 @@ function addFilter(filteredElement, typeOfElement) {
         if (filteredElement === oneAppliance.name) {
           oneRecipe.hasFilters += 1;
           // la même chose que : oneRecipe.hasFilters = oneRecipe.hasFilter + 1
-          console.log(
+          /**console.log(
             "La recette",
             oneRecipe.name,
             " contient",
             oneAppliance.name
-          );
+          );*/
         }
       });
     }
@@ -207,30 +203,67 @@ function addFilter(filteredElement, typeOfElement) {
         if (filteredElement === oneUstensil.name) {
           oneRecipe.hasFilters += 1;
           // la même chose que : oneRecipe.hasFilters = oneRecipe.hasFilter + 1
-          console.log(
+          /**console.log(
             "La recette",
             oneRecipe.name,
             " contient",
             oneUstensil.name
-          );
+          );*/
         }
       });
     }
   });
-  console.log("Nombre de filtres cliqués:", totalFiltersClicked);
+  //console.log("Nombre de filtres cliqués:", totalFiltersClicked);
   getValidRecipes();
 }
 
 //fonction permettant de supprimer les filtres
 
+function removeFilter(filteredElement, typeOfElement) {
+  totalFiltersClicked -= 1;
+  //console.log("c'est le nom :", name, "de type", type);
+
+  let type = ["ingredients", "appliances", "ustensils"];
+
+  allRecipes.forEach(function (oneRecipe) {
+    if (type[typeOfElement] === "ingredients") {
+      oneRecipe.ingredients.forEach(function (oneIngredient) {
+        if (filteredElement === oneIngredient.name) {
+          oneRecipe.hasFilters -= 1;
+        }
+      });
+    }
+    if (type[typeOfElement] === "appliances") {
+      oneRecipe.appliance.forEach(function (oneAppliance) {
+        if (filteredElement === oneAppliance.name) {
+          oneRecipe.hasFilters -= 1;
+        }
+      });
+    }
+    if (type[typeOfElement] === "ustensils") {
+      oneRecipe.ustensils.forEach(function (oneUstensil) {
+        if (filteredElement === oneUstensil.name) {
+          oneRecipe.hasFilters -= 1;
+        }
+      });
+    }
+  });
+  getValidRecipes();
+}
+
 // fonction permettant d'afficher les recettes valides
 
-function getValidRecipes() {
+function getValidRecipes(input = false) {
   let validRecipes = [];
-  allRecipes.forEach(function (oneRecipe) {
+  allRecipesObjects.forEach(function (oneRecipe) {
     if (oneRecipe.hasFilters === totalFiltersClicked) {
-      validRecipes.push(oneRecipe);
-
+      if (input !== false) {
+        if (oneRecipe.name.includes(input)) {
+          validRecipes.push(oneRecipe);
+        }
+      } else {
+        validRecipes.push(oneRecipe);
+      }
       // console.log("La recette", oneRecipe.name, " est valide");
     }
   });
@@ -252,7 +285,7 @@ function displayRecipes() {
         <div class="title-duration">
           <div class="name">${oneRecipe.name}</div>
           <div class="duration">
-            <img class="clock" src="img/clock.JPG" /> ${oneRecipe.time} min
+            <img class="clock" src="img/clock.jpg" /> ${oneRecipe.time} min
           </div>
         </div>
         <div class="ingredient-list">
@@ -283,17 +316,32 @@ function addFilterBox(name, type) {
           <div id="${name}">
             ${name}
           </div>
-          <div class="icon" id="closeTag" >
-            <i class="fa fa-times-circle-o" aria-hidden="true" id="closeTagIcon" style="cursor:pointer"></i>
+          <div class="icon removeElement" id="remove-${name}" style="cursor:pointer">
+            <i class="fa fa-times-circle-o" aria-hidden="true"  ></i>
           </div>
         </div>
       </div>`;
-  container.innerHTML += template;
+  container.insertAdjacentHTML("beforeend", template);
   //on cible l'icone de fermeture des tags
-  let cross = document.getElementById("closeTagIcon");
+  let cross = document.getElementById("remove-" + name);
+  console.log("on crée l'event");
   cross.addEventListener("click", function () {
-    //console.log("Vous souhaitez retirer le filtre :", name); //quand je choisis 2 éléments (ex: 1 ingredient et 1 appliance) il me demande seulement si je veux retirer le 1er élément cliqué
+    let box = document.getElementById("box-" + name);
+    box.remove();
+    activeFilters.forEach(function (oneFilter, index) {
+      if (oneFilter === name) {
+        activeFilters.splice(index, 1);
+      }
+    });
 
     removeFilter(name, type);
+    //console.log("Vous souhaitez retirer le filtre :", name); //quand je choisis 2 éléments (ex: 1 ingredient et 1 appliance) il me demande seulement si je veux retirer le 1er élément cliqué
+  });
+}
+
+function getInputEvent() {
+  document.getElementById("search").addEventListener("input", function () {
+    //console.log(this.value); //pour tester l'input
+    getValidRecipes(this.value);
   });
 }
