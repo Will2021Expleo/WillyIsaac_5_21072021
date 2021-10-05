@@ -48,7 +48,7 @@ function getFilters() {
   let allAppliancesFilters = [];
   let allUstensilsFilters = [];
 
-  validRecipes.forEach(function (oneRecipe) {
+  allRecipes.forEach(function (oneRecipe) {
     oneRecipe.ingredients.forEach(function (oneIngredient) {
       if (!allIngredientsFilters.includes(oneIngredient.name)) {
         allIngredientsFilters.push(oneIngredient.name);
@@ -158,14 +158,18 @@ function createEventsForFilters() {
 
 function addFilter(filteredElement, typeOfElement) {
   totalFiltersClicked += 1; //on icrémente le nombre de filtre cliqué de 1 à chaque fois
+
   let type = ["ingredients", "appliances", "ustensils"];
+
   addFilterBox(filteredElement, typeOfElement);
+
   console.log(
     "L'élément cliqué:",
     filteredElement,
     "et c'est du type:",
     type[typeOfElement]
-  ); //on affiche l'élément sur lequel on a cliqué dans ingrédient, appareil et ustensile
+  );
+  //on affiche l'élément sur lequel on a cliqué dans ingrédient, appareil et ustensile
 
   allRecipes.forEach(function (oneRecipe) {
     if (type[typeOfElement] === "ingredients") {
@@ -182,6 +186,7 @@ function addFilter(filteredElement, typeOfElement) {
         }
       });
     }
+
     if (type[typeOfElement] === "appliances") {
       oneRecipe.appliance.forEach(function (oneAppliance) {
         if (filteredElement === oneAppliance.name) {
@@ -196,6 +201,7 @@ function addFilter(filteredElement, typeOfElement) {
         }
       });
     }
+
     if (type[typeOfElement] === "ustensils") {
       oneRecipe.ustensils.forEach(function (oneUstensil) {
         if (filteredElement === oneUstensil.name) {
@@ -215,38 +221,12 @@ function addFilter(filteredElement, typeOfElement) {
   getValidRecipes();
 }
 
-function removeFilter(filteredElement, typeOfElement) {
-  let type = ["ingredients", "appliances", "ustensils"];
-  console.log("c'est le nom :", filteredElement, "de type", typeOfElement);
-  totalFiltersClicked -= 1;
+//fonction permettant de supprimer les filtres
 
-  allRecipes.forEach(function (oneRecipe) {
-    if (type[typeOfElement] === "ingredients") {
-      oneRecipe.ingredients.forEach(function (oneIngredient) {
-        if (filteredElement === oneIngredient.name) {
-          oneRecipe.hasFilters -= 1;
-        }
-      });
-    }
-    if (type[typeOfElement] === "appliances") {
-      oneRecipe.appliance.forEach(function (oneAppliance) {
-        if (filteredElement === oneAppliance.name) {
-          oneRecipe.hasFilters -= 1;
-        }
-      });
-    }
-    if (type[typeOfElement] === "ustensils") {
-      oneRecipe.ustensils.forEach(function (oneUstensil) {
-        if (filteredElement === oneUstensil.name) {
-          oneRecipe.hasFilters -= 1;
-        }
-      });
-    }
-  });
-}
+// fonction permettant d'afficher les recettes valides
 
-let validRecipes = [];
 function getValidRecipes() {
+  let validRecipes = [];
   allRecipes.forEach(function (oneRecipe) {
     if (oneRecipe.hasFilters === totalFiltersClicked) {
       validRecipes.push(oneRecipe);
@@ -254,6 +234,7 @@ function getValidRecipes() {
       // console.log("La recette", oneRecipe.name, " est valide");
     }
   });
+
   allRecipes = validRecipes;
   displayRecipes();
   getFilters();
@@ -262,11 +243,10 @@ function getValidRecipes() {
 function displayRecipes() {
   let container = document.getElementById("cardsMenu");
   container.innerText = "";
-  allRecipes.forEach(function (oneRecipe) {
-    console.log("cette recette est valide :", oneRecipe.name);
 
+  allRecipes.forEach(function (oneRecipe) {
     let template = `<div class="card">
-    <div class="header-card" src="/image.jpg"></div>
+    <img class="header-card" src="img/image.jfif"/>
       <!--image-->
       <div class="footer-card" id="footerCard">
         <div class="title-duration">
@@ -298,21 +278,22 @@ function addFilterBox(name, type) {
   let colors = ["#3282f7", "#68D9A4", "#ED6454"];
 
   let container = document.getElementById("activeFilters");
-  let template = `<div class="allTagsBox" style="background:${colors[type]}">
+  let template = `<div class="allTagsBox" style="background:${colors[type]}" id="box-${name}">
         <div class="tagsBox">
-          <div class="${name}" id="${name}">
+          <div id="${name}">
             ${name}
           </div>
-          <div class="icon" id="closeTag" style="cursor:pointer">
-            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          <div class="icon" id="closeTag" >
+            <i class="fa fa-times-circle-o" aria-hidden="true" id="closeTagIcon" style="cursor:pointer"></i>
           </div>
         </div>
       </div>`;
   container.innerHTML += template;
   //on cible l'icone de fermeture des tags
-  let cross = document.getElementById("closeTag");
+  let cross = document.getElementById("closeTagIcon");
   cross.addEventListener("click", function () {
-    console.log("Vous souhaitez retirer le filtre :", name); //quand je choisis 2 éléments (ex: 1 ngredient et 1 appliance) il me demande seulement si je veux retirer le 1er élément cliqué
+    //console.log("Vous souhaitez retirer le filtre :", name); //quand je choisis 2 éléments (ex: 1 ingredient et 1 appliance) il me demande seulement si je veux retirer le 1er élément cliqué
+
     removeFilter(name, type);
   });
 }

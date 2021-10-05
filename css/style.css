@@ -101,6 +101,7 @@ header {
     display: flex;
     flex-direction: row;
     padding-right: 5px;
+    color: white;
 }
 
 .icon {
@@ -115,13 +116,14 @@ header {
     margin: 5px 10px 10px 0
 }
 
-.line-through{
+.line-through {
     text-decoration: line-through;
     cursor: not-allowed;
+    color: black;
 }
 
-.pointer{
-    cursor : pointer;
+.pointer {
+    cursor: pointer;
 }
 
 /* filtres Ingredients*/
@@ -270,6 +272,7 @@ header {
 .selectList .allIngredients {
     background-color: #3282f7;
     border-radius: 5px;
+    color: white;
     /*display: grid;*/
     /*grid-template-columns: 1fr 1fr 1fr;*/
     /*largeur des colonnes*/
@@ -282,6 +285,8 @@ header {
 
 .selectList .allAppliances {
     background-color: #68D9A4;
+    border-radius: 5px;
+    color: white;
     /*display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
     /*largeur des colonnes*/
@@ -294,6 +299,8 @@ header {
 
 .selectList .allUstensils {
     background-color: #ED6454;
+    border-radius: 5px;
+    color: white;
     /*display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
     /*largeur des colonnes*/
