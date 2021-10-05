@@ -1,194 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les petits plats</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les petits plats</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <!--Awesome-->
+  <script src="https://kit.fontawesome.com/f00dd8d0c9.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <header>
-        <div class="logo">Les petits plats</div>
-        <div class="search-area">
+  <!--logo et titre-->
+  <header>
+    <img class="logo" src="img/logo.JPG" />
+    <div class="logo-title">Les petits plats</div>
 
-            <input type="search" id="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette">
-            <!--icon de recherche--> <div class="icon"></div>
-        </div>
- 
-    </header>
-<section class="navigation">
-            
-                <div class="nav-ingredient">Ingrédients</div>
-                <div class="nav-device">Appareil</div>
-                <div class="nav-ustensils">Ustensilles</div>
-            
-</section>
-<section class="cards-menu">
-   <div class="card">
-       <div class="header-card" src="/image.jpg"></div><!--image-->
-       <div class="footer-card">
-           <div class="title-duration">
-            <div class="name">Name</div>
-            <div class="duration">Duration</div>
-           </div>
-           <div class="ingredient-list">
-               <ul class="content">
-                   <li class="ingredient">1</li>
-                   <li class="ingredient">2</li>
-                    <li class="ingredient">3</li>
-                    <li class="ingredient">4</li>
-                    <li class="ingredient">5</li>
-               </ul>
-                <ul class="content">
-                    <li class="ingredient">1</li>
-                    <li class="ingredient">2</li>
-                    <li class="ingredient">3</li>
-                    <li class="ingredient">4</li>
-                    <li class="ingredient">5</li>
-                </ul>
-           </div>
-       </div>
-   </div>
-
-<div class="card">
-    <div class="header-card" src="/image.jpg"></div>
-    <!--image-->
-    <div class="footer-card">
-        <div class="title-duration">
-            <div class="name">Name</div>
-            <div class="duration">Duration</div>
-        </div>
-        <div class="ingredient-list">
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-        </div>
+    <div class="search-area">
+      <input type="search" id="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
+      <div id="search-icon"><i class="fas fa-search"></i></div>
     </div>
-</div>
+  </header>
 
-<div class="card">
-    <div class="header-card" src="/image.jpg"></div>
-    <!--image-->
-    <div class="footer-card">
-        <div class="title-duration">
-            <div class="name">Name</div>
-            <div class="duration">Duration</div>
-        </div>
-        <div class="ingredient-list">
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-        </div>
+  <!----------Affichage des tags recherchés----------->
+
+  <div class="activeFilters" id="activeFilters">
+    <!--insertion de la template de la fonction addFilterBox du fichier des fonctions.js-->
+  </div>
+
+  <!--menu du site-->
+
+  <!--Section des filtres (ingredients , appareils et ustensils)-->
+  <div class="filtersContainer" id="selectContainer">
+
+    <!--ingredients search-->
+    <div class="dropdown selectList" data-type="ingredients" id="searchIngredient">
+      <div class="input-group filtres--ingredients">
+        <input class="col inputFiltres inputIngredients" type="text" id="input-ingredients" name="ingredients"
+          placeholder="Ingrédients" />
+        <button type="button" class="btn btnFilters" id="btnIngredients" name="ingredients"
+          data-target="detailList-ingredients">
+          <div class="displayIngredients" id="displayIngredients">
+            <i class="fas fa-chevron-down show"></i>
+          </div>
+        </button>
+      </div>
+
+      <div class="allIngredients" id="allIngredients" hidden>
+        <!--ici on vient ajouter les div pour afficher la liste des ingredients grâce à la fonction allFilters-->
+        <!--<div></div>-->
+      </div>
+
     </div>
-</div>
 
-<div class="card">
-    <div class="header-card" src="/image.jpg"></div>
-    <!--image-->
-    <div class="footer-card">
-        <div class="title-duration">
-            <div class="name">Name</div>
-            <div class="duration">Duration</div>
-        </div>
-        <div class="ingredient-list">
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-        </div>
+
+    <!--appliance search-->
+    <div class="dropdown selectList" data-type="appliances" id="searchAppliance">
+      <div class="input-group filtres--appliance">
+        <input class="col inputFiltres inputAppliance" type="text" id="input-appliance" name="appliance"
+          placeholder="Appareils" />
+        <button type="button" class="btn btnFilters" id="btnAppliances" name="appliance"
+          data-target="detailList-appliance">
+          <div class="displayAppliances" id="displayAppliances">
+            <i class="fas fa-chevron-down show"></i>
+          </div>
+        </button>
+      </div>
+      <!--affichage des appliances-->
+      <div class="allAppliances" id="allAppliances" hidden>
+        <!--<div></div>-->
+      </div>
+      <!--affichage des appliances-->
     </div>
-</div>
 
-<div class="card">
-    <div class="header-card" src="/image.jpg"></div>
-    <!--image-->
-    <div class="footer-card">
-        <div class="title-duration">
-            <div class="name">Name</div>
-            <div class="duration">Duration</div>
-        </div>
-        <div class="ingredient-list">
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-        </div>
+    <!--ustensils search-->
+    <div class="dropdown selectList" data-type="ustensiles" id="searchUstensil">
+      <div class="input-group filtres--ustensiles">
+        <input class="col inputFiltres inputUstensiles" type="text" id="input-ustensils" name="ustensiles"
+          placeholder="Ustensiles" />
+        <button type="button" class="btn btnFilters" id="btnUstensils" name="ustensiles"
+          data-target="detailList-ustensiles">
+          <div class="displayUstensils" id="displayUstensils">
+            <i class="fas fa-chevron-down show"></i>
+          </div>
+        </button>
+      </div>
+      <div class="allUstensils" id="allUstensils" hidden>
+        <!--<div></div>-->
+      </div>
     </div>
-</div>
+  </div>
+  </div>
 
-<div class="card">
-    <div class="header-card" src="/image.jpg"></div>
-    <!--image-->
-    <div class="footer-card">
-        <div class="title-duration">
-            <div class="name">Name</div>
-            <div class="duration">Duration</div>
-        </div>
-        <div class="ingredient-list">
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-            <ul class="content">
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-                <li class="ingredient"></li>
-            </ul>
-        </div>
-    </div>
-</div>
+  <!--**********************************************************-->
+  <!--les cartes de menus-->
+  <section class="cards-menu" id="cardsMenu">
+    <!--ici on vient ajouter les div pour afficher la liste des recettes grâce à la fonction displayRecipes-->
+  </section>
 
-
-</section>
-
-    <script src="index.js"></script>
+  <!--Javascript-->
+  <!--<script src="./js/data/recipes.js"></script> -->
+  <script src="./js/data/recipes.js"></script>
+  <script src="./js/classes.js"></script>
+  <script src="./js/functions.js"></script>
+  <script type="module" src="./js/index.js"></script>
+  <!-- <script src="./js/ingredients.js"></script> -->
 </body>
+
 </html>
