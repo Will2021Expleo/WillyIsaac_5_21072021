@@ -23,6 +23,8 @@ function createRecipesObject() {
         oneIngredient.quantity,
         oneIngredient.unit
       );
+      console.log(oneRecipe.ingredients);
+
       oneNewRecipeObject.addIngredient(oneIngredientObject);
     });
 
@@ -289,9 +291,16 @@ function displayRecipes() {
           </div>
         </div>
         <div class="ingredient-list">
+
           <ul class="content">
-            <li class="ingredient">${oneRecipe.ingredients}</li>
-            
+
+          ${oneRecipe.ingredients
+            .map(
+              (oneIngredient) =>
+                `<li class="ingredient"><span>${oneIngredient.name} : </span> ${oneIngredient.quantity} ${oneIngredient.unit}</li>`
+            )
+            .join("")}
+
           </ul>
           <ul class="recette">
             <p>
