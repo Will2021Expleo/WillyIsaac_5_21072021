@@ -18,8 +18,9 @@
 
     <div class="logo-title">Les petits plats</div>
 
+    <!--Champ de recherche sur le site-->
     <div class="search-area">
-      <input type="search" id="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
+      <input type="text" id="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
       <div id="search-icon"><i class="fas fa-search"></i></div>
     </div>
   </header>
@@ -27,55 +28,58 @@
   <!----------Affichage des tags recherchés----------->
 
   <div class="activeFilters" id="activeFilters">
-    <!--insertion de la template de la fonction addFilterBox du fichier des fonctions.js-->
-  </div>
 
-  <!--menu du site-->
-
-  <!--Section des filtres (ingredients , appareils et ustensils)-->
-  <div class="filtersContainer" id="selectContainer">
-
-    <!--ingredients search-->
-    <div class="dropdown selectList" data-type="ingredients" id="searchIngredient">
-      <div class="input-group filtres--ingredients">
-        <input class="col inputFiltres inputIngredients" type="text" id="input-ingredients" name="ingredients"
-          placeholder="Ingrédients" />
-        <button type="button" class="btn btnFilters" id="btnIngredients" name="ingredients"
-          data-target="detailList-ingredients">
-          <div class="displayIngredients" id="displayIngredients">
-            <i class="fas fa-chevron-down show"></i>
-          </div>
-        </button>
-      </div>
-
-      <div class="allIngredients" id="allIngredients" hidden>
-        <!--ici on vient ajouter les div pour afficher la liste des ingredients grâce à la fonction allFilters-->
-        <!--<div></div>-->
-      </div>
-
+    <div id="box-select">
+      <!--insertion de la template de la fonction addFilterBox du fichier des fonctions.js-->
     </div>
 
 
 
-    <!--appliance search-->
-    <div class="dropdown selectList" data-type="appliances" id="searchAppliance">
-      <div class="input-group filtres--appliance">
-        <input class="col inputFiltres inputAppliance" type="text" id="input-appliance" name="appliance"
-          placeholder="Appareils" />
-        <button type="button" class="btn btnFilters" id="btnAppliances" name="appliance"
-          data-target="detailList-appliance">
-          <div class="displayAppliances" id="displayAppliances">
-            <i class="fas fa-chevron-down show"></i>
-          </div>
-        </button>
-      </div>
-      <!--affichage des appliances-->
-      <div class="allAppliances" id="allAppliances" hidden>
-        <!--<div></div>-->
-      </div>
-      <!--affichage des appliances-->
-    </div>
+    <!--menu du site-->
 
+    <!--Section des filtres (ingredients , appareils et ustensils)-->
+    <div class="filtersContainer" id="selectContainer">
+      <!--Dropdown ou filters-->
+
+      <!--ingredients search-->
+      <div class="dropdown selectList" data-type="ingredients" id="searchIngredient">
+        <!--dropdown ingredients-->
+        <div class="input-group filtres--ingredients">
+
+          <input class="col inputFiltres inputIngredients" type="text" id="input-ingredients" name="ingredients"
+            placeholder="Ingrédients" />
+          <button type="button" class="btn btnFilters" id="btnIngredients" name="ingredients"
+            data-target="detailList-ingredients">
+            <div class="displayIngredients" id="displayIngredients">
+              <i class="fas fa-chevron-down show"></i>
+            </div>
+          </button>
+        </div>
+        <div class="allIngredients" id="allIngredients" hidden>
+          <!--ici on vient ajouter les div pour afficher la liste des ingredients grâce à la fonction allFilters-->
+          <!--<div></div>-->
+        </div>
+      </div>
+
+      <!--appliance search-->
+      <div class="dropdown selectList" data-type="appliances" id="searchAppliance">
+        <div class="input-group filtres--appliance">
+          <input class="col inputFiltres inputAppliance" type="text" id="input-appliance" name="appliance"
+            placeholder="Appareils" />
+          <button type="button" class="btn btnFilters" id="btnAppliances" name="appliance"
+            data-target="detailList-appliance">
+            <div class="displayAppliances" id="displayAppliances">
+              <i class="fas fa-chevron-down show"></i>
+            </div>
+          </button>
+        </div>
+        <!--affichage de la liste des appliances-->
+        <div class="allAppliances" id="allAppliances" hidden>
+          <!--<div></div>-->
+        </div>
+
+      </div>
+    </div>
     <!--ustensils search-->
     <div class="dropdown selectList" data-type="ustensiles" id="searchUstensil">
       <div class="input-group filtres--ustensiles">
@@ -89,10 +93,12 @@
         </button>
       </div>
       <div class="allUstensils" id="allUstensils" hidden>
-        <!--<div></div>-->
+        <div></div>-->
       </div>
     </div>
-  </div>
+
+
+
   </div>
 
   <!--**********************************************************-->

@@ -1,16 +1,24 @@
+/* eslint-disable no-unused-vars */
 //création d'une classe Recipe pour récupérer toutes les recettes
 class Recipe {
+  //pour stocker les recettes on crée une classe "Recipe"
   constructor(name, description, time) {
-    this.name = name;
-    this.description = description;
-    this.time = time;
-    this.ingredients = [].sort();
-    this.appliance = [];
-    this.ustensils = [];
+    //on met en paramètre le "nom" la "description" et le "time"
+    this.name = name; //on va stocker le nom des recettes renseigné en paramètre
+    this.description = description; //on va stocker la description des recettes renseigné en paramètre
+    this.time = time; //on va stocker le temps des recettes renseigné en paramètre
+    this.ingredients = []; //on stocke les ingrédients dans un tableau vide
+    this.appliance = []; //on stocke les appliances dans un tableau vide
+    this.ustensils = []; //on stocke les ustensils dans un tableau vide
     this.hasFilters = 0;
   }
+  /**
+   * Pour affichier le contenu de la classe Recipe:
+   * let oneRecipe = new Recipe("choux", 10, "exemple de recette")
+   * console.log("voici le contenu de notre recette:", oneRecipe)
+   */
 
-  //Méthode qui permet d'ajouter des ingrédients à notre liste d'ingrédients
+  //Méthode qui permet d'ajouter les ingrédients à notre liste d'ingrédients
   addIngredient(ingredient) {
     this.ingredients.push(ingredient);
   }

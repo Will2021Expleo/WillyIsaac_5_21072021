@@ -1,29 +1,34 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 let allRecipes = []; //pour stocker toutes les recipes
 let allRecipesObjects = [];
 let allFilters = [];
 let totalFiltersClicked = 0;
 
-//fonction permettant de gérer l'ensemble des recettes
+//------------------------------------------------------------------
+// fonction permettant de gérer l'ensemble des recettes
+//------------------------------------------------------------------
 function createRecipesObject() {
   //on boucle sur l'ensemble des recettes du fichier recipes.js
   recipes.forEach(function (oneRecipe) {
     //console.log(oneRecipe); permet d'afficher le contenu de chaque recettes
 
-    //on crée un objet recipe
+    //on crée un objet permettant de récupérer le nom, la description et la durée de chaque recette
     let oneNewRecipeObject = new Recipe(
       oneRecipe.name,
       oneRecipe.description,
       oneRecipe.time
     );
 
-    //permet de récupérer et d'afficher les ingrédients
+    //on boucle sur chaque ingredients de oneRecipe
     oneRecipe.ingredients.forEach(function (oneIngredient) {
+      //permet de récupérer et d'afficher le nom des ingrédients, la quantité et l'unité pour chaque recette
       let oneIngredientObject = new Ingredient(
         oneIngredient.ingredient,
         oneIngredient.quantity,
         oneIngredient.unit
       );
-      console.log(oneRecipe.ingredients);
+      //console.log(oneRecipe.ingredients); //permet d'afficher tout les ingredients sous forme de tableau
 
       oneNewRecipeObject.addIngredient(oneIngredientObject);
     });
@@ -51,20 +56,25 @@ function getFilters() {
   let allAppliancesFilters = [];
   let allUstensilsFilters = [];
 
+  //document.querySelectorAll(".card").forEach((showCards) => showCards.remove());
+
   allRecipes.forEach(function (oneRecipe) {
     oneRecipe.ingredients.forEach(function (oneIngredient) {
       if (allIngredientsFilters.includes(oneIngredient.name) === false) {
         allIngredientsFilters.push(oneIngredient.name);
+        allIngredientsFilters.sort(); //permet de trier par ordre alphabétique la liste des ingredients
       }
     });
     oneRecipe.appliance.forEach(function (oneAppliance) {
       if (allAppliancesFilters.includes(oneAppliance.name) === false) {
         allAppliancesFilters.push(oneAppliance.name);
+        allAppliancesFilters.sort(); //permet de trier par ordre alphabétique la liste des appliance
       }
     });
     oneRecipe.ustensils.forEach(function (oneUstensil) {
       if (allUstensilsFilters.includes(oneUstensil.name) === false) {
         allUstensilsFilters.push(oneUstensil.name);
+        allUstensilsFilters.sort(); //permet de trier par ordre alphabétique la liste des ustensiles
       }
     });
   });
@@ -81,7 +91,7 @@ function getFilters() {
 let activeFilters = [];
 //fonction pour afficher les filtre des ingredients, appliances, ustensils
 function displayFilters() {
-  console.log("ActiveFilters :", activeFilters);
+  //console.log("ActiveFilters :", activeFilters);
   //permet de lier allFilters[0], allFilters[1], allFilters[2] à leur contenus respectifs
   let arrayConfig = ["allIngredients", "allAppliances", "allUstensils"];
 
@@ -252,15 +262,21 @@ function removeFilter(filteredElement, typeOfElement) {
   });
   getValidRecipes();
 }
-
-// fonction permettant d'afficher les recettes valides
-
+//-----------------------------------------------------------------------
+// fonction permettant d'afficher les recettes valides à partir de la barre de recherche principale
+//-----------------------------------------------------------------------
 function getValidRecipes(input = false) {
   let validRecipes = [];
   allRecipesObjects.forEach(function (oneRecipe) {
     if (oneRecipe.hasFilters === totalFiltersClicked) {
       if (input !== false) {
+        //on recherche dans le nom des recettes
         if (oneRecipe.name.includes(input)) {
+          //on récupère le "name" renseigner en paramètre dans les classes
+          validRecipes.push(oneRecipe);
+        }
+        //on recherche dans les descriptions des recettes
+        if (oneRecipe.description.includes(input)) {
           validRecipes.push(oneRecipe);
         }
       } else {
@@ -268,6 +284,12 @@ function getValidRecipes(input = false) {
       }
       // console.log("La recette", oneRecipe.name, " est valide");
     }
+    //on lance le filtre sur les ingrédients
+    oneRecipe.ingredients.forEach(function (oneIngredient) {
+      if (oneIngredient.name.includes(input)) {
+        validRecipes.push(oneRecipe);
+      }
+    });
   });
 
   allRecipes = validRecipes;
@@ -275,6 +297,9 @@ function getValidRecipes(input = false) {
   getFilters();
 }
 
+//--------------------------------------------------------------------------
+//Affichage des cartes sur la page html
+//--------------------------------------------------------------------------
 function displayRecipes() {
   let container = document.getElementById("cardsMenu");
   container.innerText = "";
@@ -291,16 +316,13 @@ function displayRecipes() {
           </div>
         </div>
         <div class="ingredient-list">
-
           <ul class="content">
-
           ${oneRecipe.ingredients
             .map(
               (oneIngredient) =>
                 `<li class="ingredient"><span>${oneIngredient.name} : </span> ${oneIngredient.quantity} ${oneIngredient.unit}</li>`
             )
             .join("")}
-
           </ul>
           <ul class="recette">
             <p>
@@ -312,10 +334,13 @@ function displayRecipes() {
       </div>`;
 
     container.innerHTML += template;
+    //container.insertAdjacentHTML("beforeend", template);
   });
 }
 
+//----------------------------------------------------------------
 //function pour gérer les tags sélectionnés dans les différents éléments
+//-----------------------------------------------------------------------------
 function addFilterBox(name, type) {
   let colors = ["#3282f7", "#68D9A4", "#ED6454"];
 
@@ -348,9 +373,35 @@ function addFilterBox(name, type) {
   });
 }
 
+//------------------------------------------------------------
+//Recherche dans la barre de recherche principale
+//------------------------------------------------------------
 function getInputEvent() {
   document.getElementById("search").addEventListener("input", function () {
     //console.log(this.value); //pour tester l'input
     getValidRecipes(this.value);
   });
+}
+
+function getValidIngredient(input = false) {
+  let validIngredients = [];
+  oneRecipe.ingredients.forEach(function (oneIngredient) {
+    if (oneIngredient.name.includes(input)) {
+      validIngredients.push(oneRecipe);
+    } else {
+      validIngredients.push(oneRecipe);
+    }
+  });
+  allRecipes = validIngredients;
+  displayRecipes();
+  getFilters();
+}
+
+function getIngredientInputEvent() {
+  document
+    .getElementById("input-ingredients")
+    .addEventListener("input", function () {
+      console.log(this.value); //pour tester l'input'
+      getValidIngredient(this.value);
+    });
 }

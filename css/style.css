@@ -67,7 +67,6 @@ header {
 .activeFilters {
     margin-top: 10px;
     width: 100%;
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -138,6 +137,16 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+
+    /*display: grid;
+    /*grid-template-columns: 1fr 1fr 1fr;*/
+    /*largeur des colonnes*/
+    /*grid-column-gap: 20px;
+    */
+    /*espacement entre les colonnes*/
+    /*grid-auto-flow: row;
+    */
 }
 
 .filtres--appliance {
@@ -245,13 +254,10 @@ header {
     animation-name: btnFiltres;
     animation-duration: 1s;
     animation-fill-mode: both;
-}
-
-/*couleur des chevrons*/
-.fa-chevron-down {
     color: #ffffff;
-
 }
+
+
 
 
 .btn:focus {
@@ -273,20 +279,15 @@ header {
     background-color: #3282f7;
     border-radius: 5px;
     color: white;
-    /*display: grid;*/
-    /*grid-template-columns: 1fr 1fr 1fr;*/
-    /*largeur des colonnes*/
-    /*grid-column-gap: 20px;
-    */
-    /*espacement entre les colonnes*/
-    /*grid-auto-flow: row;
-    */
+    z-index: 2;
+
 }
 
 .selectList .allAppliances {
     background-color: #68D9A4;
     border-radius: 5px;
     color: white;
+    z-index: 2;
     /*display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
     /*largeur des colonnes*/
@@ -301,6 +302,7 @@ header {
     background-color: #ED6454;
     border-radius: 5px;
     color: white;
+    z-index: 2;
     /*display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
     /*largeur des colonnes*/
@@ -419,7 +421,7 @@ header {
     font-size: 12px;
     font-family: 'roboto';
     font-weight: 400;
-    display:block;
+    display: block;
     margin-block-start: 0;
     margin-block-end: 0.5em;
 }
@@ -431,3 +433,5 @@ header {
 
     height: 100px;
 }
+
+
