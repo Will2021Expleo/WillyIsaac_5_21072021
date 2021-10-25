@@ -10,4 +10,11 @@ getValidRecipes(); //permet d'afficher les recettes contenants les filtres cliqu
 
 getInputEvent(); //permet de faire une recherche depuis le champ de recherche principale
 
-//mainSearchEvent();
+downIngredient();
+upIngredient();
+downAppliance();
+upAppliance();
+
+getInputIngredientsEvent();
+getInputAppliancesEvent();
+getInputUstensilsEvent();
