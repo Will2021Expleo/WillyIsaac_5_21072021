@@ -6,8 +6,6 @@ getFilters();
 
 getInputEvent(); //permet de faire une recherche depuis le champ de recherche principale
 
-displayRecipes(); //à supprimer pour le chargement de la page
-
 // pour gérer les recherches depuis les ingrédients, les ustensiles et les appareils
 getInputAppliancesEvent();
 getInputUstensilsEvent();
