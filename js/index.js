@@ -4,17 +4,11 @@ createRecipesObject(); //on rappelle la fonction createRecipeObject pour affihce
 //on appelle tout les filtres
 getFilters();
 
-createEventsForFilters();
-
-getValidRecipes(); //permet d'afficher les recettes contenants les filtres cliqués
-
 getInputEvent(); //permet de faire une recherche depuis le champ de recherche principale
 
-downIngredient();
-upIngredient();
-downAppliance();
-upAppliance();
+displayRecipes(); //à supprimer pour le chargement de la page
 
-getInputIngredientsEvent();
+// pour gérer les recherches depuis les ingrédients, les ustensiles et les appareils
 getInputAppliancesEvent();
 getInputUstensilsEvent();
+getInputIngredientsEvent();

@@ -1,12 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-let allRecipes = []; //pour stocker toutes les recipes
+let allRecipes = []; //pour stocker toutes les recettes (fonction utilisée : createRecipesObject)
 let allRecipesObjects = [];
 let allFilters = [];
-
-let allIngredients = [];
-let allAppliances = [];
-let allUstensils = [];
 
 let totalFiltersClicked = 0;
 
@@ -47,18 +43,20 @@ chevronDownUstensils.addEventListener("click", downUstensil);
 chevronUpUstensils.addEventListener("click", upUstensil);
 
 //------------------------------------------------------------------
-// fonction permettant de gérer l'ensemble des recettes
+// début fonction permettant de gérer l'ensemble des recettes
 //------------------------------------------------------------------
 function createRecipesObject() {
+  //on crée la fonction "createRecipesObject" : création des recettes sous forme d'objet
   //on boucle sur l'ensemble des recettes du fichier recipes.js
   recipes.forEach(function (oneRecipe) {
-    //console.log(oneRecipe); permet d'afficher le contenu de chaque recettes
+    //console.log(oneRecipe); permet d'afficher les recettes une par une
+    //recipes : nom de la variable déclaré dans le fichiers des recettes
 
     //on crée un objet permettant de récupérer le nom, la description et la durée de chaque recette
-    let oneNewRecipeObject = new Recipe(
-      oneRecipe.name,
-      oneRecipe.description,
-      oneRecipe.time
+    let oneNewRecipeObject = new Recipe( //variable qui va être remplie à chaque boucle de recette
+      oneRecipe.name, //pour récupérer le nom de la recette
+      oneRecipe.description, //pour récupérer la description de la recette
+      oneRecipe.time //pour récupérer le temps de la recette
     );
 
     //on boucle sur chaque ingredients de oneRecipe
@@ -70,15 +68,15 @@ function createRecipesObject() {
         oneIngredient.unit
       );
       //console.log(oneRecipe.ingredients); //permet d'afficher tout les ingredients sous forme de tableau
-      allIngredients.push(oneIngredientObject.name);
       oneNewRecipeObject.addIngredient(oneIngredientObject);
+      //console.log(allIngredients);
     });
 
-    //permet de récupérer et d'afficher les appareils
+    //permet de récupérer et d'ajouter les appareils à la recette
     let oneApplianceObject = new Appliance(oneRecipe.appliance);
     oneNewRecipeObject.addAppliance(oneApplianceObject);
 
-    //permet de récupérer et d'afficher les ingrédients
+    //permet de récupérer et d'ajouter les ustensiles à la recette
     oneRecipe.ustensils.forEach(function (oneUstensil) {
       let oneUstensilObject = new Ustensil(oneUstensil);
       oneNewRecipeObject.addUstensil(oneUstensilObject);
@@ -91,13 +89,14 @@ function createRecipesObject() {
   allRecipesObjects = allRecipes;
 }
 
+//------------------------------------------------------------------
 //fonction permettant de gérer les filtres sur les recettes
+//------------------------------------------------------------------
 function getFilters() {
+  //document.querySelectorAll(".card").forEach((showCards) => showCards.remove());
   let allIngredientsFilters = []; //tableau pour récupérer l'ensemble des ingredients
   let allAppliancesFilters = [];
   let allUstensilsFilters = [];
-
-  //document.querySelectorAll(".card").forEach((showCards) => showCards.remove());
 
   allRecipes.forEach(function (oneRecipe) {
     oneRecipe.ingredients.forEach(function (oneIngredient) {
@@ -131,18 +130,21 @@ function getFilters() {
 
 let activeFilters = [];
 //fonction pour afficher les filtre des ingredients, appliances, ustensils
-function displayFilters() {
+function displayFilters(allFiltersCopy = []) {
   //console.log("ActiveFilters :", activeFilters);
   //permet de lier allFilters[0], allFilters[1], allFilters[2] à leur contenus respectifs
   let arrayConfig = ["allIngredients", "allAppliances", "allUstensils"];
-
+  let filterTabActive = allFilters;
+  if (allFiltersCopy.length > 0) {
+    filterTabActive = allFiltersCopy;
+  }
   arrayConfig.forEach(function (containerName, index) {
     //on récupère le conteneur du filtre courant
     let container = document.getElementById(containerName);
     //on vide le conteneur de ses anciens filtres
     container.textContent = "";
     //on ajoute chaque valeur au filtre
-    allFilters[index].forEach(function (oneElement) {
+    filterTabActive[index].forEach(function (oneElement) {
       //boucle sur l'ensemble des filtres
       let elementToAdd = document.createElement("div"); //on crée la <div> pour ajouter tout les éléments : ingrédients, appliances et ustensils.
 
@@ -264,12 +266,6 @@ function removeFilter(filteredElement, typeOfElement) {
 //-----------------------------------------------------------------------
 function getValidRecipes(input = false) {
   let validRecipes = [];
-  let colorsMessageBox = [
-    //variable pour gérer la couleur le message de l'input
-    "green", //validRecipes
-    "red", //noValidRecipes
-  ];
-  let closeMessageBox = document.getElementById("close__messageBox");
 
   allRecipesObjects.forEach(function (oneRecipe) {
     if (oneRecipe.hasFilters === totalFiltersClicked) {
@@ -289,20 +285,6 @@ function getValidRecipes(input = false) {
             .includes(input)
         ) {
           validRecipes.push(oneRecipe);
-        } else if (
-          oneRecipe.appliance
-            .map((oneAppliance) => oneAppliance.name)
-            .join()
-            .includes(input)
-        ) {
-          validRecipes.push(oneRecipe);
-        } else if (
-          oneRecipe.ustensils
-            .map((oneUstensil) => oneUstensil.name)
-            .join()
-            .includes(input)
-        ) {
-          validRecipes.push(oneRecipe);
         }
       } else {
         validRecipes.push(oneRecipe);
@@ -313,9 +295,20 @@ function getValidRecipes(input = false) {
 
   allRecipes = validRecipes;
 
+  // /**------------------------------------------------------------------
+  //   //affichage message en fonction des résultats
+  //   --------------------------------------------------------------------*/
+  let colorsMessageBox = [
+    //variable pour gérer la couleur le message de l'input
+    "#7FFF00", //validRecipes(vert)
+    "#ff3300", //noValidRecipes
+  ];
+
   if (input.length < 3) {
+    //   //si le nb de caractères rentrés est < 3 je n'affiche rien
     document.getElementById("messageBox").style.display = "none";
   } else {
+    //   //sinon le nb de d'éléments trouvés dans le tableau est différent de 0
     if (validRecipes.length !== 0) {
       document.getElementById("showMessage").innerText =
         validRecipes.length + " recette(s) correspond(ent) à votre recherche";
@@ -323,22 +316,35 @@ function getValidRecipes(input = false) {
       document.getElementById("messageBox").style.background =
         colorsMessageBox[0];
     } else if (validRecipes.length === 0) {
-      (document.getElementById("showMessage").innerText =
+      document.getElementById("showMessage").innerText =
         "Aucune recette ne correspond à votre critère... vous pouvez chercher: " +
-        "tarte aux pommes"),
-        +"poison, " + "etc.";
+        "« tarte aux pommes », " +
+        "«poison», " +
+        "etc.";
       document.getElementById("messageBox").style.display = "block";
       document.getElementById("messageBox").style.background =
         colorsMessageBox[1];
     }
   }
-  closeMessageBox.addEventListener("click", () => {
-    document.getElementById("messageBox").style.display = "none";
-  });
+  // /**------------------------------------------------------------------
+  //   //fin affichage message en fonction des résultats
+  //   --------------------------------------------------------------------*/
 
   displayRecipes();
   getFilters();
 }
+
+/**------------------------------------------------------------------ 
+    //fermeture de la boite de message 
+    --------------------------------------------------------------------*/
+let closeMessageBox = document.getElementById("close__messageBox");
+closeMessageBox.addEventListener("click", () => {
+  document.getElementById("messageBox").style.display = "none";
+});
+
+/**------------------------------------------------------------------ 
+    //fin fermeture de la boite de message 
+    --------------------------------------------------------------------*/
 
 //--------------------------------------------------------------------------
 //Affichage des cartes sur la page html
@@ -485,8 +491,24 @@ function upUstensil() {
 function getInputEvent() {
   document.getElementById("search").addEventListener("keyup", function () {
     //console.log(this.value); //pour tester l'input
-    getValidRecipes(this.value);
+    getValidRecipes(this.value); //je recherche dans l'ensemble des recettes
   });
+}
+
+function getAllElements(input, index) {
+  //allelements = ingredients, appareils, ustensiles
+  let arrayAllElements = [];
+  allFilters[index].forEach(function (oneElement) {
+    if (oneElement.includes(input)) {
+      arrayAllElements.push(oneElement);
+    }
+  });
+  if (input === "") {
+    arrayAllElements = allFilters[index];
+  }
+  allFiltersCopy = allFilters;
+  allFiltersCopy[index] = arrayAllElements;
+  displayFilters(allFiltersCopy);
 }
 
 //------------------------------------------------------------
@@ -496,10 +518,10 @@ function getInputIngredientsEvent() {
   document
     .getElementById("ingredient-search")
     .addEventListener("keyup", function () {
-      getValidRecipes(this.value);
+      getFilters();
+      getAllElements(this.value, 0);
     });
 }
-
 //------------------------------------------------------------
 //Recherche dans la barre de recherche appareils
 //------------------------------------------------------------
@@ -507,7 +529,8 @@ function getInputAppliancesEvent() {
   document
     .getElementById("appliance-search")
     .addEventListener("keyup", function () {
-      getValidRecipes(this.value);
+      getFilters();
+      getAllElements(this.value, 1);
     });
 }
 //------------------------------------------------------------
@@ -517,6 +540,7 @@ function getInputUstensilsEvent() {
   document
     .getElementById("ustensil-search")
     .addEventListener("keyup", function () {
-      getValidRecipes(this.value);
+      getFilters();
+      getAllElements(this.value, 2);
     });
 }
