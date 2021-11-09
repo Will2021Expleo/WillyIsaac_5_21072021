@@ -11,7 +11,7 @@ $appliancesColor: #68D9A4;
 $ustensilsColor:#ED6454;
 
 body {
-    width: 1440px;
+    max-width: 1440px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@ header {
     margin: auto;
 
     .logo {
-
+        margin-top: 5px;
         height: 90px;
         display: flex;
         justify-content: center;
@@ -39,10 +39,10 @@ form {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 69px;
+    // width: 100%;
+    // height: 69px;
     margin-top: 17px;
-    margin: auto;
+    // margin: auto;
     background: #E7E7E7;
     border-radius: 5px;
 
@@ -64,7 +64,7 @@ form {
         #search-icon {
             position: absolute;
             top: 20px;
-            right: 15px;
+            right: 5px;
             font-size: 20px;
         }
     }
@@ -73,7 +73,7 @@ form {
 .messageBoxText {
     width: 100%;
     height: 1.5rem;
-    margin: 0 0 1rem 0;
+    margin: 0;
     border-radius: 5px;
     display: none;
 
@@ -113,7 +113,7 @@ nav {
         display: flex;
         flex-direction: column;
         margin-top: 10px;
-        width: 100%;
+        // width: 100%;
         padding: 0;
         position: relative;
 
@@ -182,17 +182,23 @@ nav {
             #allIngredients,
             #allAppliances,
             #allUstensils {
-                width: auto;
+                width: 100%;
                 color: #FFFFFF;
                 position: absolute;
                 top: 62px;
                 left: 0px;
                 display: grid;
-                grid-template-columns: repeat(3, 150px);
+                grid-template-columns: repeat(3, 33%);
                 border-radius: 0 0 5px 5px;
                 overflow: scroll;
+                max-height: 350px;
                 z-index: 10;
                 text-transform: capitalize;
+
+                .pointer {
+                    height: 30px;
+                    font-size: 14px;
+                }
             }
         }
 
@@ -208,7 +214,7 @@ nav {
         .selectListIngredient {
             background: $ingrendientsColor;
             position: relative;
-            
+
 
             #chevronDownIngredient {
                 position: absolute;
@@ -271,6 +277,8 @@ nav {
             }
         }
     }
+
+
 }
 
 /*------------------------------------------------------------------------------------------------
@@ -288,9 +296,9 @@ Affichages des cartes
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        width: 440px;
+        width: 400px;
         /*height: 368px;*/
-        margin: 10px 0 50px 0;
+        margin: 25px 5px 25px 5px;
 
 
         .header-card {
@@ -308,7 +316,7 @@ Affichages des cartes
             display: flex;
             flex-direction: column;
             width: 100%;
-            height: 50%;
+            // height: 50%;
             background: #e7e7e7;
             padding: 15px 0 0 0;
             margin: 0;
@@ -391,10 +399,33 @@ Affichages des cartes
 
 
 // Responsive
-@media(max-width: 1200px) {
+@media(max-width: 1230px) {
     body {
         max-width: 85%;
     }
+
+    nav .activeFilters .filtersContainer {
+        display: flex;
+        flex-direction: column !important;
+        margin: 10px 0;
+        align-items: center;
+    }
+
+
+
+    .selectListIngredient,
+    .selectListUstensils,
+    .selectListAppliance {
+        margin: 15px 0 0 0 !important;
+        width: 100%;
+
+    }
+
+    .box-extend {
+        width: 100% !important;
+    }
+
+
 
     .cards-menu {
         width: 100%;
@@ -404,21 +435,44 @@ Affichages des cartes
         justify-content: space-between;
 
         .card {
-            margin-right: 20px;
+            margin-bottom: 10px;
+            width: 48%;
+
+            .header-card {
+                width: 100%;
+
+            }
         }
     }
+
+    #allIngredients,
+    #allAppliances,
+    #allUstensils {
+
+        grid-template-columns: repeat(6, 15%) !important;
+        max-height: 200px;
+        font-size: 14px;
+        justify-content: space-between;
+        overflow: scroll;
+       
+    }
+
+
+
 }
 
 
 @media(max-width: 1090px) {
     body {
-        max-width: 100%;
-        margin: auto;
+        width: 90%;
+
     }
 
     .card {
         width: 300px;
     }
+
+
 }
 
 
@@ -426,11 +480,32 @@ Affichages des cartes
 @media(max-width:920px) {
     body {
         width: 90%;
-        margin: 10px 3rem;
     }
 
     .search-area {
         width: 50%;
+
+        #search {
+            padding: 0 !important;
+        }
+    }
+
+
+
+    nav .activeFilters .filtersContainer {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    #allIngredients,
+    #allAppliances,
+    #allUstensils {
+
+        grid-template-columns: repeat(5, 20%) !important;
+
+        font-size: 12px;
+        justify-content: space-between;
     }
 
     .cards-menu {
@@ -441,19 +516,20 @@ Affichages des cartes
 
         .card {
             width: 100%;
+            margin-left: 0;
+            margin-right: 0;
 
             .header-card {
                 width: 100%;
-                height: 330px;
-                margin: auto;
-
+                height: 200px;
             }
         }
     }
 
+
     .title-duration {
 
-        font-size: 25px;
+
         font-weight: 500;
         position: relative;
 
@@ -481,33 +557,203 @@ Affichages des cartes
     .recette p {
         font-size: 12px;
     }
+
+    .filtersContainer {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // .selectListIngredient {
+        //     width: 100%;
+        //     display: flex;
+        // }
+    }
+
+    nav {
+        .activeFilters {
+            .selectListIngredient {
+                width: 100%;
+                margin: 0;
+            }
+
+            .selectListAppliance {
+                width: 100%;
+                margin: 0;
+            }
+
+            .selectListUstensils {
+                width: 100%;
+                margin: 0;
+            }
+        }
+    }
 }
 
 
 @media(max-width:765px) {
     body {
         width: 100%;
-        justify-content: center;
+
+    }
+
+    #allIngredients,
+    #allAppliances,
+    #allUstensils {
+
+        grid-template-columns: repeat(4, 25%) !important;
+
+        font-size: 12px;
+        justify-content: space-between;
     }
 }
 
-@media(max-width: 550px) {
-    .nav{
-        .activeFilters{
-            display:flex;
-            flex-direction:column;
 
-        .filtersContainer{
-            width: 100%;
-            display:flex;
-            flex-direction:column;
-            justify-content: center;
+@media(max-width: 640px) {
+    #search {
+        font-size: 14px !important;
+    }
 
-            .selectListIngredient{
-                width: 100%;
+    .cards-menu {
+
+
+        .footer-card {
+            .title-duration {
+                font-size: 14px;
             }
-        }
         }
     }
 
+    .messageBoxText {
+        .message {
+            font-size: 16px;
+        }
+    }
+
+    #allIngredients,
+    #allAppliances,
+    #allUstensils {
+
+        grid-template-columns: repeat(3, 34%) !important;
+
+        font-size: 12px;
+        justify-content: space-between;
+    }
+
+}
+
+
+@media(max-width: 550px) {
+    .nav {
+        .activeFilters {
+            display: flex;
+            flex-direction: column;
+
+            .filtersContainer {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .selectListIngredient {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+
+
+}
+
+
+@media(max-width:500px) {
+    #search-icon {
+        display: none;
+    }
+
+}
+
+
+@media(max-width : 450px) {
+    body {
+        width: 100%
+    }
+
+    header .logo {
+        height: 70px;
+
+    }
+
+    #search {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    .messageBoxText {
+        .message {
+            font-size: 12px;
+        }
+    }
+
+    #allIngredients,
+    #allAppliances,
+    #allUstensils {
+
+        grid-template-columns: repeat(2, 50%) !important;
+
+        font-size: 12px;
+        justify-content: space-between;
+    }
+
+    .cards-menu {
+
+
+        .footer-card {
+            .title-duration {
+                font-size: 16px;
+            }
+        }
+
+        .header-card {
+            height: 150px !important;
+        }
+    }
+
+    .ingredient-list {
+        .content {
+            width: 100%;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .recette {
+            width: 100%;
+            padding: 0;
+            margin-right: 5px;
+        }
+    }
+
+}
+
+
+@media (max-width: 300px) {
+
+    #allIngredients,
+    #allAppliances,
+    #allUstensils {
+
+        grid-template-columns: repeat(1, 100%) !important;
+
+        font-size: 12px;
+        justify-content: space-between;
+    }
+
+    #ingredient-search,
+    #appliance-search,
+    #ustensil-search {
+        font-size: 14px;
+    }
 }

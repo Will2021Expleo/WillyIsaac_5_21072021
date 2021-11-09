@@ -168,6 +168,9 @@ function displayFilters(allFiltersCopy = []) {
   });
 }
 
+//---------------------------------------------------
+//fonction permettant d'ajouter les filtres
+//---------------------------------------------------
 function addFilter(filteredElement, typeOfElement) {
   totalFiltersClicked += 1; //on icrémente le nombre de filtre cliqué de 1 à chaque fois
 
@@ -175,21 +178,11 @@ function addFilter(filteredElement, typeOfElement) {
 
   addFilterBox(filteredElement, typeOfElement);
 
-  // console.log(
-  //   "L'élément cliqué:",
-  //   filteredElement,
-  //   "et c'est du type:",
-  //   type[typeOfElement]
-  // );
-  //on affiche l'élément sur lequel on a cliqué dans ingrédient, appareil et ustensile
-
   allRecipesObjects.forEach(function (oneRecipe) {
     if (type[typeOfElement] === "ingredients") {
       oneRecipe.ingredients.forEach(function (oneIngredient) {
         if (filteredElement === oneIngredient.name) {
           oneRecipe.hasFilters += 1;
-          // la même chose que : oneRecipe.hasFilters = oneRecipe.hasFilter + 1
-          //console.log("La recette", oneRecipe.name," contient", oneIngredient.name);
         }
       });
     }
@@ -198,13 +191,6 @@ function addFilter(filteredElement, typeOfElement) {
       oneRecipe.appliance.forEach(function (oneAppliance) {
         if (filteredElement === oneAppliance.name) {
           oneRecipe.hasFilters += 1;
-          // la même chose que : oneRecipe.hasFilters = oneRecipe.hasFilter + 1
-          /**console.log(
-            "La recette",
-            oneRecipe.name,
-            " contient",
-            oneAppliance.name
-          );*/
         }
       });
     }
@@ -213,13 +199,6 @@ function addFilter(filteredElement, typeOfElement) {
       oneRecipe.ustensils.forEach(function (oneUstensil) {
         if (filteredElement === oneUstensil.name) {
           oneRecipe.hasFilters += 1;
-          // la même chose que : oneRecipe.hasFilters = oneRecipe.hasFilter + 1
-          /**console.log(
-            "La recette",
-            oneRecipe.name,
-            " contient",
-            oneUstensil.name
-          );*/
         }
       });
     }
@@ -228,8 +207,9 @@ function addFilter(filteredElement, typeOfElement) {
   getValidRecipes();
 }
 
+//---------------------------------------------------
 //fonction permettant de supprimer les filtres
-
+//---------------------------------------------------
 function removeFilter(filteredElement, typeOfElement) {
   totalFiltersClicked -= 1;
   //console.log("c'est le nom :", name, "de type", type);
@@ -266,21 +246,30 @@ function removeFilter(filteredElement, typeOfElement) {
 //-----------------------------------------------------------------------
 function getValidRecipes(input = false) {
   let validRecipes = [];
+  //pour gérer la saisie en minuscules et majuscules
+  if (input !== false) {
+    input = input.toUpperCase();
+  }
+
+  let counter = 0; //déclaration d'un compteur pour calculer le nombre de boucle à chaque recherche avec la boucle forEach
 
   allRecipesObjects.forEach(function (oneRecipe) {
+    counter = counter + 1;
     if (oneRecipe.hasFilters === totalFiltersClicked) {
       if (input !== false) {
+        let recipName = oneRecipe.name.toUpperCase(); //convertie le nom des recettes en majuscules
+        let descriptionUpper = oneRecipe.description.toUpperCase(); //convertie la description des recettes en majuscules
         //on recherche dans le nom des recettes
-        if (oneRecipe.name.includes(input)) {
+        if (recipName.includes(input)) {
           //on récupère le "name" renseigner en paramètre dans les classes
           validRecipes.push(oneRecipe);
         }
         //on recherche dans les descriptions des recettes
-        else if (oneRecipe.description.includes(input)) {
+        else if (descriptionUpper.includes(input)) {
           validRecipes.push(oneRecipe);
         } else if (
           oneRecipe.ingredients
-            .map((oneIngredient) => oneIngredient.name)
+            .map((oneIngredient) => oneIngredient.name.toUpperCase())
             .join()
             .includes(input)
         ) {
@@ -292,6 +281,7 @@ function getValidRecipes(input = false) {
       // console.log("La recette", oneRecipe.name, " est valide");
     }
   });
+  console.log("Il y a eu", counter, "tours de boucle"); //on affiche le nombre de boucle pour la recherche
 
   allRecipes = validRecipes;
 
@@ -301,7 +291,7 @@ function getValidRecipes(input = false) {
   let colorsMessageBox = [
     //variable pour gérer la couleur le message de l'input
     "#7FFF00", //validRecipes(vert)
-    "#ff3300", //noValidRecipes
+    "#ff3300", //noValidRecipes(rouge)
   ];
 
   if (input.length < 3) {
@@ -334,6 +324,7 @@ function getValidRecipes(input = false) {
   getFilters();
 }
 
+/**------------------------------------------------------------------ 
 /**------------------------------------------------------------------ 
     //fermeture de la boite de message 
     --------------------------------------------------------------------*/
@@ -498,8 +489,10 @@ function getInputEvent() {
 function getAllElements(input, index) {
   //allelements = ingredients, appareils, ustensiles
   let arrayAllElements = [];
+  input = input.toUpperCase(); //pour gérér la saisie en majuscules
   allFilters[index].forEach(function (oneElement) {
-    if (oneElement.includes(input)) {
+    let elementUpper = oneElement.toUpperCase();
+    if (elementUpper.includes(input)) {
       arrayAllElements.push(oneElement);
     }
   });
