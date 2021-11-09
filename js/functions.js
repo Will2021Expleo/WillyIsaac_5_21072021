@@ -247,15 +247,6 @@ function removeFilter(filteredElement, typeOfElement) {
 function getValidRecipes(input = false) {
   let validRecipes = [];
   let counter = 0;
-
-  for (let i = 0; i < validRecipes.length; i++) {
-    counter = counter + 1;
-    let oneRecipe = validRecipes[i];
-    if (oneRecipe.hasFilters !== totalFiltersClicked) {
-      validRecipes.splice(i, 1);
-    }
-  }
-
   if (input !== false) {
     input = input.toUpperCase();
   }
@@ -285,7 +276,13 @@ function getValidRecipes(input = false) {
       validRecipes.push(oneRecipe);
     }
   }
-
+  for (let i = 0; i < validRecipes.length; i++) {
+    counter = counter + 1;
+    let oneRecipe = validRecipes[i];
+    if (oneRecipe.hasFilters !== totalFiltersClicked) {
+      validRecipes.splice(i, 1);
+    }
+  }
   console.log("Il y a eu ", counter, "tours de boucle");
 
   allRecipes = validRecipes;
