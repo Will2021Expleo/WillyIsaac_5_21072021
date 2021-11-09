@@ -246,42 +246,47 @@ function removeFilter(filteredElement, typeOfElement) {
 //-----------------------------------------------------------------------
 function getValidRecipes(input = false) {
   let validRecipes = [];
-  //pour gérer la saisie en minuscules et majuscules
+  let counter = 0;
+
+  for (let i = 0; i < validRecipes.length; i++) {
+    counter = counter + 1;
+    let oneRecipe = validRecipes[i];
+    if (oneRecipe.hasFilters !== totalFiltersClicked) {
+      validRecipes.splice(i, 1);
+    }
+  }
+
   if (input !== false) {
     input = input.toUpperCase();
   }
-
-  let counter = 0; //déclaration d'un compteur pour calculer le nombre de boucle à chaque recherche avec la boucle forEach
-
-  allRecipesObjects.forEach(function (oneRecipe) {
+  for (let i = 0; i < allRecipesObjects.length; i++) {
     counter = counter + 1;
-    if (oneRecipe.hasFilters === totalFiltersClicked) {
-      if (input !== false) {
-        let recipName = oneRecipe.name.toUpperCase(); //convertie le nom des recettes en majuscules
-        let descriptionUpper = oneRecipe.description.toUpperCase(); //convertie la description des recettes en majuscules
-        //on recherche dans le nom des recettes
-        if (recipName.includes(input)) {
-          //on récupère le "name" renseigner en paramètre dans les classes
-          validRecipes.push(oneRecipe);
-        }
-        //on recherche dans les descriptions des recettes
-        else if (descriptionUpper.includes(input)) {
-          validRecipes.push(oneRecipe);
-        } else if (
-          oneRecipe.ingredients
-            .map((oneIngredient) => oneIngredient.name.toUpperCase())
-            .join()
-            .includes(input)
-        ) {
-          validRecipes.push(oneRecipe);
-        }
-      } else {
+    let oneRecipe = allRecipesObjects[i];
+    if (input !== false) {
+      //on recherche dans le nom des recettes
+      let recipeName = oneRecipe.name.toUpperCase();
+      let descriptionUpper = oneRecipe.description.toUpperCase();
+      if (recipeName.includes(input)) {
+        //on récupère le "name" renseigner en paramètre dans les classes
         validRecipes.push(oneRecipe);
       }
-      // console.log("La recette", oneRecipe.name, " est valide");
+      //on recherche dans les descriptions des recettes
+      else if (descriptionUpper.includes(input)) {
+        validRecipes.push(oneRecipe);
+      } else if (
+        oneRecipe.ingredients
+          .map((oneIngredient) => oneIngredient.name.toUpperCase())
+          .join()
+          .includes(input)
+      ) {
+        validRecipes.push(oneRecipe);
+      }
+    } else {
+      validRecipes.push(oneRecipe);
     }
-  });
-  console.log("Il y a eu", counter, "tours de boucle"); //on affiche le nombre de boucle pour la recherche
+  }
+
+  console.log("Il y a eu ", counter, "tours de boucle");
 
   allRecipes = validRecipes;
 
@@ -291,7 +296,7 @@ function getValidRecipes(input = false) {
   let colorsMessageBox = [
     //variable pour gérer la couleur le message de l'input
     "#7FFF00", //validRecipes(vert)
-    "#ff3300", //noValidRecipes(rouge)
+    "#ff3300", //noValidRecipes
   ];
 
   if (input.length < 3) {
