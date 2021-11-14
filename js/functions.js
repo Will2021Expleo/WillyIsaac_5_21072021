@@ -82,11 +82,8 @@ function createRecipesObject() {
       oneNewRecipeObject.addUstensil(oneUstensilObject);
     });
 
-    allRecipes.push(oneNewRecipeObject); // permet de stocker toutes les recettes
+    allRecipesObjects.push(oneNewRecipeObject); // permet de stocker toutes les recettes
   });
-  //return allRecipes;
-  // allRecipesObjects = allRecipes; //retourne le résultat de la fonction et permet de l'afficher dans le console.log en dehors de la fonction
-  allRecipesObjects = allRecipes;
 }
 
 //------------------------------------------------------------------
@@ -98,25 +95,27 @@ function getFilters() {
   let allAppliancesFilters = [];
   let allUstensilsFilters = [];
 
-  allRecipes.forEach(function (oneRecipe) {
-    oneRecipe.ingredients.forEach(function (oneIngredient) {
-      if (allIngredientsFilters.includes(oneIngredient.name) === false) {
-        allIngredientsFilters.push(oneIngredient.name);
-        allIngredientsFilters.sort(); //permet de trier par ordre alphabétique la liste des ingredients
-      }
-    });
-    oneRecipe.appliance.forEach(function (oneAppliance) {
-      if (allAppliancesFilters.includes(oneAppliance.name) === false) {
-        allAppliancesFilters.push(oneAppliance.name);
-        allAppliancesFilters.sort(); //permet de trier par ordre alphabétique la liste des appliance
-      }
-    });
-    oneRecipe.ustensils.forEach(function (oneUstensil) {
-      if (allUstensilsFilters.includes(oneUstensil.name) === false) {
-        allUstensilsFilters.push(oneUstensil.name);
-        allUstensilsFilters.sort(); //permet de trier par ordre alphabétique la liste des ustensiles
-      }
-    });
+  allRecipesObjects.forEach(function (oneRecipe) {
+    if (oneRecipe.toDisplay === true) {
+      oneRecipe.ingredients.forEach(function (oneIngredient) {
+        if (allIngredientsFilters.includes(oneIngredient.name) === false) {
+          allIngredientsFilters.push(oneIngredient.name);
+          allIngredientsFilters.sort(); //permet de trier par ordre alphabétique la liste des ingredients
+        }
+      });
+      oneRecipe.appliance.forEach(function (oneAppliance) {
+        if (allAppliancesFilters.includes(oneAppliance.name) === false) {
+          allAppliancesFilters.push(oneAppliance.name);
+          allAppliancesFilters.sort(); //permet de trier par ordre alphabétique la liste des appliance
+        }
+      });
+      oneRecipe.ustensils.forEach(function (oneUstensil) {
+        if (allUstensilsFilters.includes(oneUstensil.name) === false) {
+          allUstensilsFilters.push(oneUstensil.name);
+          allUstensilsFilters.sort(); //permet de trier par ordre alphabétique la liste des ustensiles
+        }
+      });
+    }
   });
   //console.log(allIngredientsFilters, allAppliancesFilters, allUstensilsFilters);
 
@@ -216,7 +215,7 @@ function removeFilter(filteredElement, typeOfElement) {
 
   let type = ["ingredients", "appliances", "ustensils"];
 
-  allRecipes.forEach(function (oneRecipe) {
+  allRecipesObjects.forEach(function (oneRecipe) {
     if (type[typeOfElement] === "ingredients") {
       oneRecipe.ingredients.forEach(function (oneIngredient) {
         if (filteredElement === oneIngredient.name) {
@@ -254,38 +253,46 @@ function getValidRecipes(input = false) {
     counter = counter + 1;
     let oneRecipe = allRecipesObjects[i];
     if (input !== false) {
+      oneRecipe.hasInput = false; //par défaut l'input est à false et s'il est renseigné il passe à true
       //on recherche dans le nom des recettes
       let recipeName = oneRecipe.name.toUpperCase();
       let descriptionUpper = oneRecipe.description.toUpperCase();
       if (recipeName.includes(input)) {
         //on récupère le "name" renseigner en paramètre dans les classes
-        validRecipes.push(oneRecipe);
+        oneRecipe.hasInput = true;
+        // validRecipes.push(oneRecipe);
       }
       //on recherche dans les descriptions des recettes
       else if (descriptionUpper.includes(input)) {
-        validRecipes.push(oneRecipe);
+        oneRecipe.hasInput = true;
+        // validRecipes.push(oneRecipe);
       } else if (
         oneRecipe.ingredients
           .map((oneIngredient) => oneIngredient.name.toUpperCase())
           .join()
           .includes(input)
       ) {
-        validRecipes.push(oneRecipe);
+        oneRecipe.hasInput = true;
+        // validRecipes.push(oneRecipe);
       }
-    } else {
-      validRecipes.push(oneRecipe);
     }
   }
-  for (let i = 0; i < validRecipes.length; i++) {
+  let totalRecipes = 0;
+  for (let i = 0; i < allRecipesObjects.length; i++) {
     counter = counter + 1;
-    let oneRecipe = validRecipes[i];
-    if (oneRecipe.hasFilters !== totalFiltersClicked) {
-      validRecipes.splice(i, 1);
+    let oneRecipe = allRecipesObjects[i];
+    oneRecipe.toDisplay = false; //par défaut
+    if (
+      oneRecipe.hasFilters === totalFiltersClicked &&
+      (input === false || (input !== false && oneRecipe.hasInput === true))
+      // si on a le bon nombre de filtre ET l'input est faux OU (l'input est vrai et que la recette à un input true )
+    ) {
+      //on affiche la recette
+      oneRecipe.toDisplay = true;
+      totalRecipes += 1;
     }
   }
   console.log("Il y a eu ", counter, "tours de boucle");
-
-  allRecipes = validRecipes;
 
   // /**------------------------------------------------------------------
   //   //affichage message en fonction des résultats
@@ -301,17 +308,17 @@ function getValidRecipes(input = false) {
     document.getElementById("messageBox").style.display = "none";
   } else {
     //   //sinon le nb de d'éléments trouvés dans le tableau est différent de 0
-    if (validRecipes.length !== 0) {
+    if (totalRecipes !== 0) {
       document.getElementById("showMessage").innerText =
-        validRecipes.length + " recette(s) correspond(ent) à votre recherche";
+        totalRecipes + " recette(s) correspond(ent) à votre recherche";
       document.getElementById("messageBox").style.display = "block";
       document.getElementById("messageBox").style.background =
         colorsMessageBox[0];
-    } else if (validRecipes.length === 0) {
+    } else if (totalRecipes === 0) {
       document.getElementById("showMessage").innerText =
         "Aucune recette ne correspond à votre critère... vous pouvez chercher: " +
         "« tarte aux pommes », " +
-        "«poison», " +
+        "«poisson», " +
         "etc.";
       document.getElementById("messageBox").style.display = "block";
       document.getElementById("messageBox").style.background =
@@ -346,8 +353,9 @@ function displayRecipes() {
   let container = document.getElementById("cardsMenu");
   container.innerText = "";
 
-  allRecipes.forEach(function (oneRecipe) {
-    let template = `<div class="card">
+  allRecipesObjects.forEach(function (oneRecipe) {
+    if (oneRecipe.toDisplay === true) {
+      let template = `<div class="card">
     <img class="header-card" src="img/image.jfif"/>
       <!--image-->
       <div class="footer-card" id="footerCard">
@@ -375,8 +383,9 @@ function displayRecipes() {
       </div>
       </div>`;
 
-    container.innerHTML += template;
-    //container.insertAdjacentHTML("beforeend", template);
+      container.innerHTML += template;
+      //container.insertAdjacentHTML("beforeend", template);
+    }
   });
 }
 
@@ -522,8 +531,9 @@ function getInputIngredientsEvent() {
 //------------------------------------------------------------
 function getInputAppliancesEvent() {
   document
-    .getElementById("appliance-search")
+    .getElementById("appliance-search") //on cible l'élement qu'on veut écouter
     .addEventListener("keyup", function () {
+      //on veut une réaction quand une touche est activée
       getFilters();
       getAllElements(this.value, 1);
     });
