@@ -282,7 +282,7 @@ function getValidRecipes(input = false) {
       // console.log("La recette", oneRecipe.name, " est valide");
     }
   });
-  console.log("Il y a eu", counter, "tours de boucle"); //on affiche le nombre de boucle pour la recherche
+  console.log("Il y a eu", counter, "tours de boucle"); //on affiche dans la consolle le nombre de boucle pour la recherche
 
   allRecipes = validRecipes;
 
@@ -310,7 +310,7 @@ function getValidRecipes(input = false) {
       document.getElementById("showMessage").innerText =
         "Aucune recette ne correspond à votre critère... vous pouvez chercher: " +
         "« tarte aux pommes », " +
-        "«poison», " +
+        "«poisson», " +
         "etc.";
       document.getElementById("messageBox").style.display = "block";
       document.getElementById("messageBox").style.background =
