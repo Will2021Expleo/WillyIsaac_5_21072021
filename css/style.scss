@@ -397,9 +397,8 @@ Affichages des cartes
 
 
 
-// --------------------------------------------------------------------------------------
+
 // Responsive
-// --------------------------------------------------------------------------------------
 @media(max-width: 1230px) {
     body {
         max-width: 85%;
@@ -414,23 +413,12 @@ Affichages des cartes
 
 
 
-      nav {
-        .activeFilters {
-            .selectListIngredient {
-                width: 100%;
-                margin: 0;
-            }
+    .selectListIngredient,
+    .selectListUstensils,
+    .selectListAppliance {
+        margin: 15px 0 0 0 !important;
+        width: 100%;
 
-            .selectListAppliance {
-                width: 100%;
-                margin: 0;
-            }
-
-            .selectListUstensils {
-                width: 100%;
-                margin: 0;
-            }
-        }
     }
 
     .box-extend {
@@ -469,7 +457,6 @@ Affichages des cartes
        
     }
 
-    
 
 
 }
@@ -584,7 +571,24 @@ Affichages des cartes
         // }
     }
 
- 
+    nav {
+        .activeFilters {
+            .selectListIngredient {
+                width: 100%;
+                margin: 0;
+            }
+
+            .selectListAppliance {
+                width: 100%;
+                margin: 0;
+            }
+
+            .selectListUstensils {
+                width: 100%;
+                margin: 0;
+            }
+        }
+    }
 }
 
 

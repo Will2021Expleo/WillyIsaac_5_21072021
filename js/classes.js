@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
+// ------------------------------------------------------------------------------------------------------
+// Utilisation de la boucle forEach pour la recherche principale
+// ------------------------------------------------------------------------------------------------------
 //création d'une classe Recipe pour récupérer toutes les recettes
 class Recipe {
-  //pour stocker les recettes on crée une classe "Recipe"
   constructor(name, description, time) {
     //on met en paramètre le "nom" la "description" et le "time"
     this.name = name; //on va stocker le nom des recettes renseigné en paramètre
