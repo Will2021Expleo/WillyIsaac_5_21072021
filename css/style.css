@@ -345,8 +345,9 @@ Affichages des cartes
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin: 0;
   padding: 0;
 }
@@ -361,9 +362,9 @@ Affichages des cartes
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  width: 400px;
+  width: 430px;
   /*height: 368px;*/
-  margin: 25px 5px 25px 5px;
+  margin: 25px 0px;
 }
 
 .cards-menu .card .header-card {
