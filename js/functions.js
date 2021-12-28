@@ -8,8 +8,7 @@ let allFilters = [];
 let totalFiltersClicked = 0;
 
 /**************************************************************** */
-/*Gestion des ingredients
-/**************************************************************** */
+/*Gestion des ingredients*/
 let ingredientContainer = document.getElementById("allIngredients");
 let boxIngredientExtended = document.getElementById("displayIngredients");
 let chevronDownIngredient = document.getElementById("chevronDownIngredient");
@@ -50,7 +49,7 @@ chevronUpUstensils.addEventListener("click", upUstensil);
 function createRecipesObject() {
   //on boucle sur l'ensemble des recettes du fichier recipes.js
   recipes.forEach(function (oneRecipe) {
-    //console.log(oneRecipe); permet d'afficher les recettes une par une
+    //console.log(oneRecipe); //permet d'afficher les recettes une par une
     //recipes : nom de la variable déclaré dans le fichiers des recettes
 
     //on crée un objet permettant de récupérer le nom, la description et la durée de chaque recette
@@ -68,19 +67,20 @@ function createRecipesObject() {
         oneIngredient.quantity,
         oneIngredient.unit
       );
-      //console.log(oneRecipe.ingredients); //permet d'afficher tout les ingredients sous forme de tableau
       oneNewRecipeObject.addIngredient(oneIngredientObject);
-      //console.log(allIngredients);
+      //console.log(oneIngredientObject);
     });
 
     //permet de récupérer et d'ajouter les appareils à la recette
     let oneApplianceObject = new Appliance(oneRecipe.appliance);
     oneNewRecipeObject.addAppliance(oneApplianceObject);
+    //console.log(oneApplianceObject);
 
     //permet de récupérer et d'ajouter les ustensiles à la recette
     oneRecipe.ustensils.forEach(function (oneUstensil) {
       let oneUstensilObject = new Ustensil(oneUstensil);
       oneNewRecipeObject.addUstensil(oneUstensilObject);
+      //console.log(oneUstensilObject);
     });
 
     allRecipes.push(oneNewRecipeObject); // permet de stocker toutes les recettes
@@ -106,6 +106,7 @@ function getFilters() {
         allIngredientsFilters.sort(); //permet de trier par ordre alphabétique la liste des ingredients
       }
     });
+
     oneRecipe.appliance.forEach(function (oneAppliance) {
       if (allAppliancesFilters.includes(oneAppliance.name) === false) {
         allAppliancesFilters.push(oneAppliance.name);
@@ -132,7 +133,7 @@ function getFilters() {
 let activeFilters = [];
 //fonction pour afficher les filtre des ingredients, appliances, ustensils
 function displayFilters(allFiltersCopy = []) {
-  //console.log("ActiveFilters :", activeFilters);
+  //console.log("ActiveFilters :", activeFilters); //permet de voir l'élément filtré
   //permet de lier allFilters[0], allFilters[1], allFilters[2] à leur contenus respectifs
   let arrayConfig = ["allIngredients", "allAppliances", "allUstensils"];
   let filterTabActive = allFilters;
@@ -352,7 +353,7 @@ function displayRecipes() {
         <div class="title-duration">
           <div class="name">${oneRecipe.name}</div>
           <div class="duration">
-            <img class="clock" src="img/clock.jpg" /> ${oneRecipe.time} min
+            <img class="clock" src="img/clock.svg" /> ${oneRecipe.time} min
           </div>
         </div>
         <div class="ingredient-list">
