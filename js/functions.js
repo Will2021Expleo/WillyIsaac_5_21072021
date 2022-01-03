@@ -14,8 +14,6 @@ let ingredientContainer = document.getElementById("allIngredients");
 let boxIngredientExtended = document.getElementById("displayIngredients");
 let chevronDownIngredient = document.getElementById("chevronDownIngredient");
 let chevronUpIngredient = document.getElementById("chevronUpIngredient");
-let boxSelectIngredient = document.getElementById("box-select");
-let inputIngredient = document.getElementById("ingredient-search");
 chevronDownIngredient.addEventListener("click", downIngredient);
 chevronUpIngredient.addEventListener("click", upIngredient);
 
@@ -25,10 +23,9 @@ chevronUpIngredient.addEventListener("click", upIngredient);
 let applianceContainer = document.getElementById("allAppliances");
 let boxApplianceExtended = document.getElementById("displayAppliances");
 let chevronDownAppliance = document.getElementById("chevronDownAppliance");
-let chevronUpAppliance = document.getElementById("chevronUpAppliance");
-let boxSelectAppliance = document.getElementById("box-select");
-let inputAppliance = document.getElementById("appliance-search");
-chevronDownAppliance.addEventListener("click", downAppliance);
+let chevronUpAppliance = document
+  .getElementById("chevronUpAppliance")
+  .chevronDownAppliance.addEventListener("click", downAppliance);
 chevronUpAppliance.addEventListener("click", upAppliance);
 
 /**************************************************************** */
@@ -37,10 +34,9 @@ chevronUpAppliance.addEventListener("click", upAppliance);
 let ustensilsContainer = document.getElementById("allUstensils");
 let boxUstensilsExtended = document.getElementById("displayUstensils");
 let chevronDownUstensils = document.getElementById("chevronDownUstensils");
-let chevronUpUstensils = document.getElementById("chevronUpUstensils");
-let boxSelectUstensils = document.getElementById("box-select");
-let inputUstensils = document.getElementById("ustensil-search");
-chevronDownUstensils.addEventListener("click", downUstensil);
+let chevronUpUstensils = document
+  .getElementById("chevronUpUstensils")
+  .chevronDownUstensils.addEventListener("click", downUstensil);
 chevronUpUstensils.addEventListener("click", upUstensil);
 
 //------------------------------------------------------------------
