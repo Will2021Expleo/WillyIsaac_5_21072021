@@ -154,6 +154,7 @@ nav .activeFilters #box-select {
 nav .activeFilters #box-select .allTagsBox {
   margin: 5px 8px 5px 0;
   color: #FFF;
+  border-radius: 5px;
 }
 
 nav .activeFilters #box-select .allTagsBox .tagsBox {
@@ -250,14 +251,32 @@ nav .activeFilters .filter #allUstensils {
   overflow: scroll;
   max-height: 350px;
   z-index: 10;
-  text-transform: capitalize;
 }
 
-nav .activeFilters .filter #allIngredients .pointer,
-nav .activeFilters .filter #allAppliances .pointer,
-nav .activeFilters .filter #allUstensils .pointer {
+nav .activeFilters .filter #allIngredients .element,
+nav .activeFilters .filter #allAppliances .element,
+nav .activeFilters .filter #allUstensils .element {
   height: 30px;
   font-size: 14px;
+  margin: 0 0 5px 0;
+}
+
+nav .activeFilters .filter #allIngredients p::first-letter,
+nav .activeFilters .filter #allAppliances p::first-letter,
+nav .activeFilters .filter #allUstensils p::first-letter {
+  text-transform: uppercase;
+}
+
+nav .activeFilters .filter #allIngredients .element-hide,
+nav .activeFilters .filter #allAppliances .element-hide,
+nav .activeFilters .filter #allUstensils .element-hide {
+  -webkit-text-decoration: line-through black;
+          text-decoration: line-through black;
+  color: black;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 nav .activeFilters .box-extend {

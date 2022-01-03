@@ -31,7 +31,6 @@ header {
         height: 90px;
         display: flex;
         justify-content: center;
-
     }
 }
 
@@ -126,12 +125,14 @@ nav {
             .allTagsBox {
                 margin: 5px 8px 5px 0;
                 color: #FFF;
+                border-radius: 5px;
 
                 .tagsBox {
                     display: flex;
                     flex-direction: row;
                     padding-right: 5px;
                     color: white;
+                    
 
                     .icon {
                         margin-left: 5px;
@@ -193,11 +194,22 @@ nav {
                 overflow: scroll;
                 max-height: 350px;
                 z-index: 10;
-                text-transform: capitalize;
+                
 
-                .pointer {
+                .element {
                     height: 30px;
                     font-size: 14px;
+                    margin: 0 0 5px 0;
+                }
+
+                p::first-letter{
+                    text-transform: uppercase;
+                }
+
+                .element-hide {
+                text-decoration: line-through black;
+                color: black;
+                user-select: none;
                 }
             }
         }
@@ -299,7 +311,6 @@ Affichages des cartes
         width: 430px;
         /*height: 368px;*/
         margin: 25px 0px;
-
 
         .header-card {
             width: 440px;
@@ -411,21 +422,16 @@ Affichages des cartes
         align-items: center;
     }
 
-
-
     .selectListIngredient,
     .selectListUstensils,
     .selectListAppliance {
         margin: 15px 0 0 0 !important;
         width: 100%;
-
     }
 
     .box-extend {
         width: 100% !important;
     }
-
-
 
     .cards-menu {
         width: 100%;
@@ -440,7 +446,6 @@ Affichages des cartes
 
             .header-card {
                 width: 100%;
-
             }
         }
     }
@@ -448,13 +453,11 @@ Affichages des cartes
     #allIngredients,
     #allAppliances,
     #allUstensils {
-
         grid-template-columns: repeat(6, 15%) !important;
         max-height: 200px;
         font-size: 14px;
         justify-content: space-between;
-        overflow: scroll;
-       
+        overflow: scroll; 
     }
 
 
@@ -465,14 +468,11 @@ Affichages des cartes
 @media(max-width: 1090px) {
     body {
         width: 90%;
-
     }
 
     .card {
         width: 300px;
     }
-
-
 }
 
 
@@ -490,20 +490,15 @@ Affichages des cartes
         }
     }
 
-
-
     nav .activeFilters .filtersContainer {
         display: flex;
         flex-direction: column;
-
     }
 
     #allIngredients,
     #allAppliances,
     #allUstensils {
-
         grid-template-columns: repeat(5, 20%) !important;
-
         font-size: 12px;
         justify-content: space-between;
     }
@@ -528,8 +523,6 @@ Affichages des cartes
 
 
     .title-duration {
-
-
         font-weight: 500;
         position: relative;
 
@@ -559,12 +552,10 @@ Affichages des cartes
     }
 
     .filtersContainer {
-
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         // .selectListIngredient {
         //     width: 100%;
         //     display: flex;
@@ -595,15 +586,12 @@ Affichages des cartes
 @media(max-width:765px) {
     body {
         width: 100%;
-
     }
 
     #allIngredients,
     #allAppliances,
     #allUstensils {
-
         grid-template-columns: repeat(4, 25%) !important;
-
         font-size: 12px;
         justify-content: space-between;
     }
@@ -634,15 +622,11 @@ Affichages des cartes
     #allIngredients,
     #allAppliances,
     #allUstensils {
-
         grid-template-columns: repeat(3, 34%) !important;
-
         font-size: 12px;
         justify-content: space-between;
     }
-
 }
-
 
 @media(max-width: 550px) {
     .nav {
@@ -662,9 +646,6 @@ Affichages des cartes
             }
         }
     }
-
-
-
 }
 
 
@@ -683,13 +664,11 @@ Affichages des cartes
 
     header .logo {
         height: 70px;
-
     }
 
     #search {
         overflow: hidden;
         text-overflow: ellipsis;
-
     }
 
     .messageBoxText {
@@ -701,15 +680,12 @@ Affichages des cartes
     #allIngredients,
     #allAppliances,
     #allUstensils {
-
         grid-template-columns: repeat(2, 50%) !important;
-
         font-size: 12px;
         justify-content: space-between;
     }
 
     .cards-menu {
-
 
         .footer-card {
             .title-duration {
@@ -735,18 +711,14 @@ Affichages des cartes
             margin-right: 5px;
         }
     }
-
 }
 
 
 @media (max-width: 300px) {
-
     #allIngredients,
     #allAppliances,
     #allUstensils {
-
         grid-template-columns: repeat(1, 100%) !important;
-
         font-size: 12px;
         justify-content: space-between;
     }

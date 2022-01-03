@@ -1,6 +1,3 @@
-// ------------------------------------------------------------------------------------------------------
-// Utilisation de la boucle forEach pour la recherche principale
-// ------------------------------------------------------------------------------------------------------
 //création d'une classe Recipe pour récupérer toutes les recettes
 class Recipe {
   constructor(name, description, time) {
@@ -11,13 +8,10 @@ class Recipe {
     this.ingredients = []; //on stocke les ingrédients dans un tableau vide
     this.appliance = []; //on stocke les appliances dans un tableau vide
     this.ustensils = []; //on stocke les ustensils dans un tableau vide
-    this.hasFilters = 0;
+    this.hasFilters = 0; // isSelected
+    this.hasInput = false;
+    this.toDisplay = true;
   }
-  /**
-   * Pour affichier le contenu de la classe Recipe:
-   * let oneRecipe = new Recipe("choux", 10, "exemple de recette")
-   * console.log("voici le contenu de notre recette:", oneRecipe)
-   */
 
   //Méthode qui permet d'ajouter les ingrédients à notre liste d'ingrédients
   addIngredient(ingredient) {
@@ -34,11 +28,6 @@ class Recipe {
     this.ustensils.push(ustensil);
   }
 }
-
-/** Test pour vérifier que la classe fonctionne : 
-let oneRecipe = new Recipe("chou fleur", "à la provençale", 10);
-console.log("voici le contenu de notre recette test :", oneRecipe);
-*/
 
 //création d'une classe ingrédient pour récupérer tout les ingrédients dans un tableau
 class Ingredient {

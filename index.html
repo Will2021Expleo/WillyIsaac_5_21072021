@@ -20,14 +20,14 @@
   </header>
 
   <form>
-    <!--Champ de recherche sur le site-->
+    <!--Champ de recherche principale sur le site-->
     <div class="search-area">
       <input type="text" id="search" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
       <div id="search-icon"><i class="fas fa-search"></i></div>
     </div>
   </form>
 
-  <!-- pour afficher un message en focntion du résultat  de la recherche -->
+  <!-- pour afficher un message en fonction du résultat  de la recherche -->
   <div class="messageBoxText" id="messageBox" hidden>
     <div class="message" id="message">
       <p class="showMessage" id="showMessage"></p>
@@ -39,7 +39,7 @@
   <nav>
     <div class="activeFilters" id="activeFilters">
       <div id="box-select">
-        <!--insertion de la template de la fonction addFilterBox du fichier des fonctions.js-->
+        <!--ici on affiche les tags qui sont cliqués dans ingredients, appareils et ustensiles-->
       </div>
 
       <div class="filtersContainer" id="selectContainer">
@@ -54,7 +54,7 @@
           <span id="chevronUpIngredient" class="hidden"><i class="fas fa-chevron-up show"></i> </span>
           <div class="allIngredients hidden" id="allIngredients">
             <!--ici on vient ajouter les div pour afficher la liste des ingredients grâce à la fonction allFilters-->
-            <!-- <div></div> -->
+            <!-- <p></p> -->
           </div>
         </div>
 
@@ -70,7 +70,7 @@
           <!--affichage de la liste des appliances-->
           <div class="allAppliances hidden" id="allAppliances">
             <!--ici on vient ajouter les div pour afficher la liste des ingredients grâce à la fonction allFilters-->
-            <!--<div></div>-->
+            <!--<p></p>-->
           </div>
 
         </div>
@@ -87,7 +87,7 @@
           <!--affichage de la liste des ustensiles-->
           <div class="allUstensils hidden" id="allUstensils">
             <!--ici on vient ajouter les div pour afficher la liste des ustensiles grâce à la fonction allFilters-->
-            <!--<div></div>-->
+            <!--<p></p>-->
           </div>
 
         </div>
