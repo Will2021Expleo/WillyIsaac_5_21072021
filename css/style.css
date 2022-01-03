@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lato:wght@300;400;700;900&display=swap");
 /*DM Sans*/
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap");
+
 /*roboto*/
 /*----Colors-------*/
 body {
@@ -13,8 +14,8 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   font-family: 'Lato', Arial, sans-serif;
   position: relative;
 }
@@ -34,8 +35,8 @@ header .logo {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 form {
@@ -43,11 +44,11 @@ form {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin-top: 17px;
   background: #E7E7E7;
   border-radius: 5px;
@@ -93,14 +94,14 @@ form .search-area #search-icon {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .messageBoxText .message .showMessage {
@@ -116,10 +117,10 @@ form .search-area #search-icon {
   width: 20px;
   right: 20px;
   -ms-grid-column-align: center;
-      justify-self: center;
+  justify-self: center;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  -ms-grid-row-align: center;
+  align-self: center;
 }
 
 .messageBoxText .message .closeMessageBox :hover {
@@ -132,8 +133,8 @@ nav .activeFilters {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-top: 10px;
   padding: 0;
   position: relative;
@@ -145,10 +146,10 @@ nav .activeFilters #box-select {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 nav .activeFilters #box-select .allTagsBox {
@@ -162,8 +163,8 @@ nav .activeFilters #box-select .allTagsBox .tagsBox {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   padding-right: 5px;
   color: white;
 }
@@ -178,8 +179,8 @@ nav .activeFilters .filtersContainer {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   margin: 10px 0;
 }
 
@@ -193,10 +194,10 @@ nav .activeFilters .filter {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 nav .activeFilters .filter ::-webkit-input-placeholder {
@@ -244,8 +245,8 @@ nav .activeFilters .filter #allUstensils {
   left: 0px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (33%)[3];
-      grid-template-columns: repeat(3, 33%);
+
+  grid-template-columns: repeat(3, 33%);
   border-radius: 0 0 5px 5px;
   overflow: scroll;
   max-height: 350px;
@@ -270,12 +271,12 @@ nav .activeFilters .filter #allIngredients .element-hide,
 nav .activeFilters .filter #allAppliances .element-hide,
 nav .activeFilters .filter #allUstensils .element-hide {
   -webkit-text-decoration: line-through black;
-          text-decoration: line-through black;
+  text-decoration: line-through black;
   color: black;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 nav .activeFilters .box-extend {
@@ -359,13 +360,13 @@ Affichages des cartes
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
 }
@@ -376,10 +377,10 @@ Affichages des cartes
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 430px;
   /*height: 368px;*/
   margin: 25px 0px;
@@ -394,7 +395,7 @@ Affichages des cartes
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .cards-menu .card #footerCard {
@@ -403,8 +404,8 @@ Affichages des cartes
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   width: 100%;
   background: #e7e7e7;
   padding: 15px 0 0 0;
@@ -419,8 +420,8 @@ Affichages des cartes
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   width: 100%;
   margin: 0 0 0 12px;
   font-size: 18px;
@@ -450,8 +451,8 @@ Affichages des cartes
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .ingredient-list .content {
@@ -479,9 +480,9 @@ Affichages des cartes
   font-weight: 400;
   display: block;
   -webkit-margin-before: 0;
-          margin-block-start: 0;
+  margin-block-start: 0;
   -webkit-margin-after: 0.5em;
-          margin-block-end: 0.5em;
+  margin-block-end: 0.5em;
 }
 
 .ingredient-list .recette p {
@@ -497,28 +498,32 @@ Affichages des cartes
   body {
     max-width: 85%;
   }
+
   nav .activeFilters .filtersContainer {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
-        -ms-flex-direction: column !important;
-            flex-direction: column !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
     margin: 10px 0;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
+
   .selectListIngredient,
   .selectListUstensils,
   .selectListAppliance {
     margin: 15px 0 0 0 !important;
     width: 100%;
   }
+
   .box-extend {
     width: 100% !important;
   }
+
   .cards-menu {
     width: 100%;
     display: -webkit-box;
@@ -526,31 +531,34 @@ Affichages des cartes
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
+
   .cards-menu .card {
     margin-bottom: 10px;
     width: 48%;
   }
+
   .cards-menu .card .header-card {
     width: 100%;
   }
+
   #allIngredients,
   #allAppliances,
   #allUstensils {
-    -ms-grid-columns: (15%)[6] !important;
-        grid-template-columns: repeat(6, 15%) !important;
+
+    grid-template-columns: repeat(6, 15%) !important;
     max-height: 200px;
     font-size: 14px;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     overflow: scroll;
   }
 }
@@ -559,6 +567,7 @@ Affichages des cartes
   body {
     width: 90%;
   }
+
   .card {
     width: 300px;
   }
@@ -568,97 +577,114 @@ Affichages des cartes
   body {
     width: 90%;
   }
+
   .search-area {
     width: 50%;
   }
+
   .search-area #search {
     padding: 0 !important;
   }
+
   nav .activeFilters .filtersContainer {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
+
   #allIngredients,
   #allAppliances,
   #allUstensils {
-    -ms-grid-columns: (20%)[5] !important;
-        grid-template-columns: repeat(5, 20%) !important;
+
+    grid-template-columns: repeat(5, 20%) !important;
     font-size: 12px;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
+
   .cards-menu {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     margin: 0 0 10px 0;
     padding: 0;
   }
+
   .cards-menu .card {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
+
   .cards-menu .card .header-card {
     width: 100%;
     height: 200px;
   }
+
   .title-duration {
     font-weight: 500;
     position: relative;
   }
+
   .title-duration .name {
     padding-right: 8em;
   }
+
   .title-duration .duration {
     position: absolute;
     top: 0;
     right: 20px;
   }
+
   .title-duration .duration .clock {
     position: absolute;
     top: 4px;
     right: 80px;
   }
+
   .ingredient-list span {
     font-size: 12px;
   }
+
   .recette p {
     font-size: 12px;
   }
+
   .filtersContainer {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
+
   nav .activeFilters .selectListIngredient {
     width: 100%;
     margin: 0;
   }
+
   nav .activeFilters .selectListAppliance {
     width: 100%;
     margin: 0;
   }
+
   nav .activeFilters .selectListUstensils {
     width: 100%;
     margin: 0;
@@ -669,15 +695,16 @@ Affichages des cartes
   body {
     width: 100%;
   }
+
   #allIngredients,
   #allAppliances,
   #allUstensils {
-    -ms-grid-columns: (25%)[4] !important;
-        grid-template-columns: repeat(4, 25%) !important;
+
+    grid-template-columns: repeat(4, 25%) !important;
     font-size: 12px;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 }
 
@@ -685,21 +712,24 @@ Affichages des cartes
   #search {
     font-size: 14px !important;
   }
+
   .cards-menu .footer-card .title-duration {
     font-size: 14px;
   }
+
   .messageBoxText .message {
     font-size: 16px;
   }
+
   #allIngredients,
   #allAppliances,
   #allUstensils {
-    -ms-grid-columns: (34%)[3] !important;
-        grid-template-columns: repeat(3, 34%) !important;
+
+    grid-template-columns: repeat(3, 34%) !important;
     font-size: 12px;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 }
 
@@ -710,9 +740,10 @@ Affichages des cartes
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
+
   .nav .activeFilters .filtersContainer {
     width: 100%;
     display: -webkit-box;
@@ -720,12 +751,13 @@ Affichages des cartes
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
+
   .nav .activeFilters .filtersContainer .selectListIngredient {
     width: 100%;
   }
@@ -741,37 +773,45 @@ Affichages des cartes
   body {
     width: 100%;
   }
+
   header .logo {
     height: 70px;
   }
+
   #search {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .messageBoxText .message {
     font-size: 12px;
   }
+
   #allIngredients,
   #allAppliances,
   #allUstensils {
-    -ms-grid-columns: (50%)[2] !important;
-        grid-template-columns: repeat(2, 50%) !important;
+
+    grid-template-columns: repeat(2, 50%) !important;
     font-size: 12px;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
+
   .cards-menu .footer-card .title-duration {
     font-size: 16px;
   }
+
   .cards-menu .header-card {
     height: 150px !important;
   }
+
   .ingredient-list .content {
     width: 100%;
     margin-left: 5px;
     margin-right: 5px;
   }
+
   .ingredient-list .recette {
     width: 100%;
     padding: 0;
@@ -780,20 +820,23 @@ Affichages des cartes
 }
 
 @media (max-width: 300px) {
+
   #allIngredients,
   #allAppliances,
   #allUstensils {
-    -ms-grid-columns: (100%)[1] !important;
-        grid-template-columns: repeat(1, 100%) !important;
+
+    grid-template-columns: repeat(1, 100%) !important;
     font-size: 12px;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
+
   #ingredient-search,
   #appliance-search,
   #ustensil-search {
     font-size: 14px;
   }
 }
+
 /*# sourceMappingURL=style.css.map */
