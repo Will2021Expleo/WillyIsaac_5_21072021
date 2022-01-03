@@ -362,7 +362,7 @@ function displayRecipes() {
         <div class="title-duration">
           <div class="name">${oneRecipe.name}</div>
           <div class="duration">
-            <img class="clock" src="img/clock.jpg" /> ${oneRecipe.time} min
+            <img class="clock" src="img/clock.svg" /> ${oneRecipe.time} min
           </div>
         </div>
         <div class="ingredient-list">
