@@ -193,12 +193,22 @@ nav {
                 overflow: scroll;
                 max-height: 350px;
                 z-index: 10;
-                text-transform: capitalize;
 
-                .pointer {
+                .element {
                     height: 30px;
                     font-size: 14px;
+                    margin: 0 0 5px 0;
                 }
+                 p::first-letter{
+                    text-transform: uppercase;    
+                }
+
+                .element-hide {
+                text-decoration: line-through black;
+                color: black;
+                user-select: none;
+                }
+
             }
         }
 
@@ -288,7 +298,7 @@ Affichages des cartes
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0;
     padding: 0;
 
@@ -296,9 +306,9 @@ Affichages des cartes
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        width: 400px;
+        width: 430px;
         /*height: 368px;*/
-        margin: 25px 5px 25px 5px;
+        margin: 25px 0px;
 
 
         .header-card {

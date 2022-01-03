@@ -1,4 +1,6 @@
-/* eslint-disable no-unused-vars */
+// ------------------------------------------------------------------------------------------------------
+// Utilisation de la boucle FOR pour la recherche principale
+// ------------------------------------------------------------------------------------------------------
 //création d'une classe "Recipe" pour récupérer toutes les recettes
 class Recipe {
   constructor(name, description, time) {
@@ -13,11 +15,6 @@ class Recipe {
     this.hasInput = false; //this hasInput remplace validRecipes.push(oneRecipe) de la fonction getValidRecipes;
     this.toDisplay = true; //attribut et un allias pour remplacer Recipe
   }
-  /**
-   * Pour affichier le contenu de la classe Recipe:
-   * let oneRecipe = new Recipe("choux", 10, "exemple de recette")
-   * console.log("voici le contenu de notre recette:", oneRecipe)
-   */
 
   //Méthode qui permet d'ajouter les ingrédients à notre liste d'ingrédients
   addIngredient(ingredient) {
@@ -34,11 +31,6 @@ class Recipe {
     this.ustensils.push(ustensil);
   }
 }
-
-/** Test pour vérifier que la classe fonctionne : 
-let oneRecipe = new Recipe("chou fleur", "à la provençale", 10);
-console.log("voici le contenu de notre recette test :", oneRecipe);
-*/
 
 //création d'une classe ingrédient pour récupérer tout les ingrédients dans un tableau avec leur nom, la quantité et l'unité
 class Ingredient {

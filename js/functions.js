@@ -13,8 +13,6 @@ let ingredientContainer = document.getElementById("allIngredients");
 let boxIngredientExtended = document.getElementById("displayIngredients");
 let chevronDownIngredient = document.getElementById("chevronDownIngredient");
 let chevronUpIngredient = document.getElementById("chevronUpIngredient");
-let boxSelectIngredient = document.getElementById("box-select");
-let inputIngredient = document.getElementById("ingredient-search");
 chevronDownIngredient.addEventListener("click", downIngredient);
 chevronUpIngredient.addEventListener("click", upIngredient);
 
@@ -25,8 +23,6 @@ let applianceContainer = document.getElementById("allAppliances");
 let boxApplianceExtended = document.getElementById("displayAppliances");
 let chevronDownAppliance = document.getElementById("chevronDownAppliance");
 let chevronUpAppliance = document.getElementById("chevronUpAppliance");
-let boxSelectAppliance = document.getElementById("box-select");
-let inputAppliance = document.getElementById("appliance-search");
 chevronDownAppliance.addEventListener("click", downAppliance);
 chevronUpAppliance.addEventListener("click", upAppliance);
 
@@ -37,8 +33,6 @@ let ustensilsContainer = document.getElementById("allUstensils");
 let boxUstensilsExtended = document.getElementById("displayUstensils");
 let chevronDownUstensils = document.getElementById("chevronDownUstensils");
 let chevronUpUstensils = document.getElementById("chevronUpUstensils");
-let boxSelectUstensils = document.getElementById("box-select");
-let inputUstensils = document.getElementById("ustensil-search");
 chevronDownUstensils.addEventListener("click", downUstensil);
 chevronUpUstensils.addEventListener("click", upUstensil);
 
@@ -142,14 +136,14 @@ function displayFilters(allFiltersCopy = []) {
     let container = document.getElementById(containerName);
     //on vide le conteneur de ses anciens filtres
     container.textContent = "";
-    //on ajoute chaque valeur au filtre
+    //boucle sur l'ensemble des filtres
     filterTabActive[index].forEach(function (oneElement) {
-      //boucle sur l'ensemble des filtres
-      let elementToAdd = document.createElement("div"); //on crée la <div> pour ajouter tout les éléments : ingrédients, appliances et ustensils.
+      //on crée la <div> pour ajouter tout les éléments : ingrédients, appliances et ustensils.
+      let elementToAdd = document.createElement("p");
 
       elementToAdd.textContent = oneElement;
       if (activeFilters.includes(oneElement) === false) {
-        elementToAdd.classList.add("pointer");
+        elementToAdd.classList.add("element");
         //on vérifie si c'est un élément sur lequel on a déjà cliqué
         elementToAdd.addEventListener("click", function () {
           //si ce n'est pas le cas on écoute le clic
@@ -159,7 +153,7 @@ function displayFilters(allFiltersCopy = []) {
         //console.log("je clique sur un élément");
         //console.log(oneElement);
       } else {
-        elementToAdd.classList.add("line-through");
+        elementToAdd.classList.add("element-hide");
       }
       //pour exécuter une action sur les filtres
       container.appendChild(elementToAdd);
@@ -171,12 +165,12 @@ function displayFilters(allFiltersCopy = []) {
 //fonction permettant d'ajouter les filtres
 //---------------------------------------------------
 function addFilter(filteredElement, typeOfElement) {
-  totalFiltersClicked += 1; //on icrémente le nombre de filtre cliqué de 1 à chaque fois
-
+  totalFiltersClicked += 1;
+  //on incrémente le nombre total de filtre cliqué de 1 à chaque fois
   let type = ["ingredients", "appliances", "ustensils"];
+  let mainSearch = document.getElementById("search").value;
 
-  addFilterBox(filteredElement, typeOfElement);
-
+  //on boucle sur chaque element et en fonction du type d'élément on incrément le filtre de 1
   allRecipesObjects.forEach(function (oneRecipe) {
     if (type[typeOfElement] === "ingredients") {
       oneRecipe.ingredients.forEach(function (oneIngredient) {
@@ -185,7 +179,6 @@ function addFilter(filteredElement, typeOfElement) {
         }
       });
     }
-
     if (type[typeOfElement] === "appliances") {
       oneRecipe.appliance.forEach(function (oneAppliance) {
         if (filteredElement === oneAppliance.name) {
@@ -193,7 +186,6 @@ function addFilter(filteredElement, typeOfElement) {
         }
       });
     }
-
     if (type[typeOfElement] === "ustensils") {
       oneRecipe.ustensils.forEach(function (oneUstensil) {
         if (filteredElement === oneUstensil.name) {
@@ -202,8 +194,15 @@ function addFilter(filteredElement, typeOfElement) {
       });
     }
   });
-  //console.log("Nombre de filtres cliqués:", totalFiltersClicked);
-  getValidRecipes();
+  //conditions pour affiner la recherche soit par tag soit par saisie
+  addTagsFilter(filteredElement, typeOfElement);
+  //getValidRecipes();
+  if (mainSearch === "") {
+    getValidRecipes();
+  } else {
+    mainSearch = mainSearch.toUpperCase();
+    getValidRecipes(mainSearch);
+  }
 }
 
 //---------------------------------------------------
@@ -212,7 +211,7 @@ function addFilter(filteredElement, typeOfElement) {
 function removeFilter(filteredElement, typeOfElement) {
   totalFiltersClicked -= 1;
   //console.log("c'est le nom :", name, "de type", type);
-
+  let mainSearch = document.getElementById("search").value;
   let type = ["ingredients", "appliances", "ustensils"];
 
   allRecipesObjects.forEach(function (oneRecipe) {
@@ -238,13 +237,19 @@ function removeFilter(filteredElement, typeOfElement) {
       });
     }
   });
-  getValidRecipes();
+  //console.log("Nombre de filtres cliqués:", totalFiltersClicked);
+  if (mainSearch === "") {
+    getValidRecipes();
+  } else {
+    mainSearch = mainSearch.toUpperCase();
+    getValidRecipes(mainSearch);
+  }
+  //getValidRecipes();
 }
 //-----------------------------------------------------------------------
 // fonction permettant d'afficher les recettes valides à partir de la barre de recherche principale
 //-----------------------------------------------------------------------
 function getValidRecipes(input = false) {
-  let validRecipes = [];
   let counter = 0;
   if (input !== false) {
     input = input.toUpperCase();
@@ -303,7 +308,7 @@ function getValidRecipes(input = false) {
     "#ff3300", //noValidRecipes
   ];
 
-  if (input.length < 3) {
+  if (input.length < 3 && activeFilters.length === 0) {
     //   //si le nb de caractères rentrés est < 3 je n'affiche rien
     document.getElementById("messageBox").style.display = "none";
   } else {
@@ -328,7 +333,6 @@ function getValidRecipes(input = false) {
   // /**------------------------------------------------------------------
   //   //fin affichage message en fonction des résultats
   //   --------------------------------------------------------------------*/
-
   displayRecipes();
   getFilters();
 }
@@ -341,10 +345,6 @@ let closeMessageBox = document.getElementById("close__messageBox");
 closeMessageBox.addEventListener("click", () => {
   document.getElementById("messageBox").style.display = "none";
 });
-
-/**------------------------------------------------------------------ 
-    //fin fermeture de la boite de message 
-    --------------------------------------------------------------------*/
 
 //--------------------------------------------------------------------------
 //Affichage des cartes sur la page html
@@ -392,7 +392,7 @@ function displayRecipes() {
 //----------------------------------------------------------------
 //function pour gérer les tags sélectionnés dans les différents éléments
 //-----------------------------------------------------------------------------
-function addFilterBox(name, type) {
+function addTagsFilter(name, type) {
   let colors = ["#3282f7", "#68D9A4", "#ED6454"];
 
   let container = document.getElementById("box-select");
@@ -425,7 +425,7 @@ function addFilterBox(name, type) {
 }
 
 /**----------------------------------------------------------------------------
-Action sur le chevronDown des ingredients pour afficher la liste
+downIngredient pour afficher la liste et upIngredient pour masquer la liste
 -----------------------------------------------------------------------------*/
 function downIngredient() {
   ingredientContainer.classList.remove("hidden"); //on enlève la class "hidden"
@@ -434,10 +434,10 @@ function downIngredient() {
   chevronDownIngredient.classList.add("hidden"); //on affiche le chevron Up
   document.getElementsByName("ingredients")[0].placeholder =
     "Rechercher un ingrédient"; //on écrit dans le input : "rechercher un ingrédient"
+  upAppliance();
+  upUstensil();
 }
-/**----------------------------------------------------------------------------
-Action sur le chevronUp des ingredients pour fermer la liste
------------------------------------------------------------------------------*/
+
 function upIngredient() {
   ingredientContainer.classList.add("hidden");
   boxIngredientExtended.classList.remove("box-extend");
@@ -446,18 +446,20 @@ function upIngredient() {
   document.getElementsByName("ingredients")[0].placeholder = "Ingredients";
   allIngredientsList = [];
 }
-
+/**----------------------------------------------------------------------------
+downIngredient pour afficher la liste et upIngredient pour masquer la liste
+-----------------------------------------------------------------------------*/
 function downAppliance() {
-  applianceContainer.classList.remove("hidden"); //on enlève la class "hidden"
-  boxApplianceExtended.classList.add("box-extend"); //pour agrandir le box des ingredients
-  chevronUpAppliance.classList.remove("hidden"); //on enlève la class "hidden"
-  chevronDownAppliance.classList.add("hidden"); //on affiche le chevron Up
+  applianceContainer.classList.remove("hidden");
+  boxApplianceExtended.classList.add("box-extend");
+  chevronUpAppliance.classList.remove("hidden");
+  chevronDownAppliance.classList.add("hidden");
   document.getElementsByName("appliances")[0].placeholder =
-    "Rechercher un appareil"; //on écrit dans le input : "rechercher un ingrédient"
+    "Rechercher un appareil";
+  upIngredient();
+  upUstensil();
 }
-//------------------------------------------------------------
-//Action sur le chevron Up pour fermer la liste des appareils
-//------------------------------------------------------------
+
 function upAppliance() {
   applianceContainer.classList.add("hidden");
   boxApplianceExtended.classList.remove("box-extend");
@@ -466,14 +468,18 @@ function upAppliance() {
   document.getElementsByName("appliances")[0].placeholder = "Appareils";
   allAppliancesList = [];
 }
-
+/**----------------------------------------------------------------------------
+downIngredient pour afficher la liste et upIngredient pour masquer la liste
+-----------------------------------------------------------------------------*/
 function downUstensil() {
-  ustensilsContainer.classList.remove("hidden"); //on enlève la class "hidden"
-  boxUstensilsExtended.classList.add("box-extend"); //pour agrandir le box des ingredients
-  chevronUpUstensils.classList.remove("hidden"); //on enlève la class "hidden"
-  chevronDownUstensils.classList.add("hidden"); //on affiche le chevron Up
+  ustensilsContainer.classList.remove("hidden");
+  boxUstensilsExtended.classList.add("box-extend");
+  chevronUpUstensils.classList.remove("hidden");
+  chevronDownUstensils.classList.add("hidden");
   document.getElementsByName("ustensils")[0].placeholder =
-    "Rechercher un ustensile"; //on écrit dans le input : "rechercher un ingrédient"
+    "Rechercher un ustensile";
+  upIngredient();
+  upAppliance();
 }
 //------------------------------------------------------------
 //Action sur le chevron Up pour fermer la liste des appareils
