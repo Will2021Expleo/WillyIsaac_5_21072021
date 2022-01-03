@@ -38,7 +38,7 @@ header .logo {
           justify-content: center;
 }
 
-.form {
+form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -53,12 +53,12 @@ header .logo {
   border-radius: 5px;
 }
 
-.form .search-area {
+form .search-area {
   width: 100%;
   position: relative;
 }
 
-.form .search-area #search {
+form .search-area #search {
   border: none;
   outline: none;
   border-radius: 5px;
@@ -69,7 +69,7 @@ header .logo {
   padding-left: 10px;
 }
 
-.form .search-area #search-icon {
+form .search-area #search-icon {
   position: absolute;
   top: 20px;
   right: 5px;
